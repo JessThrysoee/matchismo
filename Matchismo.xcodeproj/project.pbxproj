@@ -11,6 +11,7 @@
 		C5376ED71731B83400644BA4 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376ED61731B83400644BA4 /* Deck.m */; };
 		C5376EDA1731B86400644BA4 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376ED91731B86400644BA4 /* PlayingCard.m */; };
 		C5376EDD1731B87700644BA4 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */; };
+		C5FADF471733032F00F1A585 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */; };
 		C5FBE60517319A5300FC5EBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FBE60417319A5300FC5EBA /* UIKit.framework */; };
 		C5FBE60717319A5300FC5EBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FBE60617319A5300FC5EBA /* Foundation.framework */; };
 		C5FBE60917319A5300FC5EBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FBE60817319A5300FC5EBA /* CoreGraphics.framework */; };
@@ -33,6 +34,7 @@
 		C5376ED91731B86400644BA4 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCard.m; path = Model/PlayingCard.m; sourceTree = "<group>"; };
 		C5376EDB1731B87700644BA4 /* PlayingCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCardDeck.h; path = Model/PlayingCardDeck.h; sourceTree = "<group>"; };
 		C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCardDeck.m; path = Model/PlayingCardDeck.m; sourceTree = "<group>"; };
+		C5FADF461733032F00F1A585 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		C5FBE60117319A5300FC5EBA /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5FBE60417319A5300FC5EBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C5FBE60617319A5300FC5EBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C5FBE61C17319A5300FC5EBA /* MainStoryboard.storyboard */,
+				C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */,
 				C5376ED41731B7F000644BA4 /* Model */,
 				C5FBE61F17319A5300FC5EBA /* CardGameViewController.h */,
 				C5FBE62017319A5300FC5EBA /* CardGameViewController.m */,
@@ -192,6 +195,7 @@
 				C5FBE61917319A5300FC5EBA /* Default@2x.png in Resources */,
 				C5FBE61B17319A5300FC5EBA /* Default-568h@2x.png in Resources */,
 				C5FBE61E17319A5300FC5EBA /* MainStoryboard.storyboard in Resources */,
+				C5FADF471733032F00F1A585 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +219,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5FADF461733032F00F1A585 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
 		C5FBE60D17319A5300FC5EBA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -296,7 +308,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Matchismo/Matchismo-Prefix.pch";
 				INFOPLIST_FILE = "Matchismo/Matchismo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -307,7 +321,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Matchismo/Matchismo-Prefix.pch";
 				INFOPLIST_FILE = "Matchismo/Matchismo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

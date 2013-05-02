@@ -19,7 +19,17 @@
 
 + (NSArray *)validSuits
 {
-    return @[@"♥", @"♦", @"♠", @"♣"];
+    static NSArray *validSuits = nil;
+    
+    
+    
+    
+    if (!validSuits)
+    {
+        validSuits = @[@"♥", @"♦", @"♠", @"♣"];
+    }
+    
+    return validSuits;
 }
 
 
