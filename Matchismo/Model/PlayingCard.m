@@ -23,7 +23,6 @@
         {
             score = 1;
         }
-        
         else if (otherCard.rank == self.rank)
         {
             score = 4;
