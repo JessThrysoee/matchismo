@@ -13,6 +13,7 @@
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic)IBOutletCollection(UIButton) NSArray * cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
@@ -31,7 +32,6 @@
     
     return _game;
 }
-
 
 - (void)setFlipCount:(int)flipCount
 {
@@ -69,7 +69,14 @@
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.resultLabel.text = self.game.lastFlipResult;
 }
 
+- (IBAction)deal
+{
+    self.game = nil;
+    self.flipCount = 0;
+    [self updateUI];
+}
 
 @end

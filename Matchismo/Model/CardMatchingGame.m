@@ -8,18 +8,36 @@
 
 #import "CardMatchingGame.h"
 #import "Deck.h"
+#import "FlipResult.h"
 
-#define FLIP_COST        1
+#define FLIP_COST        -1
 #define MATCH_BONUS      4
-#define MISMATCH_PENALTY 2
+#define MISMATCH_PENALTY -2
 
 @interface CardMatchingGame ()
 @property (readwrite, nonatomic) int score;
 @property (strong, nonatomic) NSMutableArray *cards;
+@property (strong, nonatomic) FlipResult *flipResult;
 @end
 
 
 @implementation CardMatchingGame
+
+- (FlipResult *)flipResult
+{
+    if (!_flipResult)
+    {
+        _flipResult = [[FlipResult alloc] init];
+    }
+    
+    return _flipResult;
+}
+
+-(NSString *)lastFlipResult
+{
+    return self.flipResult.lastResult;
+}
+
 
 - (NSMutableArray *)cards
 {
@@ -61,11 +79,15 @@
 - (void)flipCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    NSUInteger score = 0;
+    NSString *result;
     
     if (!card.isUnplayable)
     {
         if (!card.isFaceup)
         {
+            result = [NSString stringWithFormat:@"Flipped up %@", card.contents];
+            
             for (Card *otherCard in self.cards)
             {
                 if (otherCard.isFaceup && !otherCard.isUnplayable)
@@ -76,17 +98,25 @@
                     {
                         otherCard.unplayable = YES;
                         card.unplayable = YES;
-                        self.score += matchScore * MATCH_BONUS;
+                        score = matchScore * MATCH_BONUS;
+                        self.score += score;
+                        [self.flipResult addMatchForCard:card andCard:otherCard withScore:score];
                     }
                     else
                     {
                         otherCard.faceUp = NO;
-                        self.score -= MISMATCH_PENALTY;
+                        score = MISMATCH_PENALTY;
+                        self.score += score;
+                        [self.flipResult addMismatchForCard:card andCard:otherCard withScore:score];
                     }
                 }
             }
             
-            self.score -= FLIP_COST;
+            if (!score)
+            {
+                [self.flipResult addFlipForCard:card];
+            }
+            self.score += FLIP_COST;
         }
         
         card.faceUp = !card.isFaceup;
