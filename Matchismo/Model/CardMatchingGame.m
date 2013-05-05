@@ -33,7 +33,8 @@
     return _flipResult;
 }
 
--(NSString *)lastFlipResult
+
+- (NSString *)lastFlipResult
 {
     return self.flipResult.lastResult;
 }
@@ -80,20 +81,16 @@
 {
     Card *card = [self cardAtIndex:index];
     NSUInteger score = 0;
-    NSString *result;
     
     if (!card.isUnplayable)
     {
         if (!card.isFaceup)
         {
-            result = [NSString stringWithFormat:@"Flipped up %@", card.contents];
-            
             for (Card *otherCard in self.cards)
             {
                 if (otherCard.isFaceup && !otherCard.isUnplayable)
                 {
                     int matchScore = [card match:@[otherCard]];
-                    
                     if (matchScore)
                     {
                         otherCard.unplayable = YES;
@@ -114,8 +111,10 @@
             
             if (!score)
             {
+                // no match or mismatch
                 [self.flipResult addFlipForCard:card];
             }
+            
             self.score += FLIP_COST;
         }
         
