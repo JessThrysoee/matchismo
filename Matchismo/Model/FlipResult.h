@@ -12,11 +12,13 @@
 
 @interface FlipResult : NSObject
 
-- (void)addMatchForCard: (Card*)card andCards:(NSArray*)otherCards withScore:(NSUInteger)score;
-- (void)addMismatchForCard: (Card*)card andCards:(NSArray*)otherCard withScore:(NSUInteger)score;
-- (void)addFlipForCard: (Card*)card;
+@property (readonly, nonatomic) NSString *lastResult;
+@property (readonly, nonatomic) NSUInteger count;
 
-@property (readonly, nonatomic) NSString* lastResult;
+- (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score;
+- (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCard withScore:(NSUInteger)score;
+- (void)addFlipForCard:(Card *)card;
+- (NSString *)resultAtIndex:(NSUInteger)index;
 
 
 @end

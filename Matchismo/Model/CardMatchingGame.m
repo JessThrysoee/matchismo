@@ -16,29 +16,13 @@
 @interface CardMatchingGame ()
 @property (readwrite, nonatomic) int score;
 @property (strong, nonatomic) NSMutableArray *cards;
-@property (strong, nonatomic) FlipResult *flipResult;
+@property (weak, nonatomic) FlipResult *flipResult;
+@property (readonly, nonatomic) NSString *flipResultCount;
 @property (nonatomic) NSUInteger matchCount;
 @end
 
 
 @implementation CardMatchingGame
-
-- (FlipResult *)flipResult
-{
-    if (!_flipResult)
-    {
-        _flipResult = [[FlipResult alloc] init];
-    }
-    
-    return _flipResult;
-}
-
-
-- (NSString *)lastFlipResult
-{
-    return self.flipResult.lastResult;
-}
-
 
 - (NSMutableArray *)cards
 {
@@ -54,6 +38,7 @@
 - (id)initWithCardCount:(NSUInteger)count
              matchCount:(NSUInteger)matchCount
               usingDeck:(Deck *)deck
+             flipResult:(FlipResult *)flipResult
 {
     self = [super init];
     
@@ -74,6 +59,7 @@
         }
         
         self.matchCount = matchCount;
+        self.flipResult = flipResult;
     }
     
     return self;

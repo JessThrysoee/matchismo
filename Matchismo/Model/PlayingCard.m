@@ -11,10 +11,6 @@
 @implementation PlayingCard
 @synthesize suit = _suit;
 
-+ (NSString *)backImage
-{
-    return @"Images/Red_Back.svg";
-}
 
 - (int)match:(NSArray *)otherCards
 {
@@ -51,12 +47,12 @@
             // suit-suit-suit ~ 5%
             score = 16;
         }
-        else if (secondCard.rank == self.rank || thirdCard.rank == self.rank)
+        else if (secondCard.rank == self.rank || thirdCard.rank == self.rank || secondCard.rank == thirdCard.rank)
         {
             // rank-rank-? ~ 17%
             score = 4;
         }
-        else if ([secondCard.suit isEqualToString:self.suit] || [thirdCard.suit isEqualToString:self.suit])
+        else if ([secondCard.suit isEqualToString:self.suit] || [thirdCard.suit isEqualToString:self.suit] || [secondCard.suit isEqualToString:thirdCard.suit])
         {
             // suit-suit-? ~ 73%
             score = 1;

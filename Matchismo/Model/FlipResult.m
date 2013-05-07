@@ -57,4 +57,23 @@
 }
 
 
+- (NSUInteger)count
+{
+    return self.results.count;
+}
+
+
+- (NSString *)resultAtIndex:(NSUInteger)index
+{
+    NSString *result;
+    
+    if (index < self.results.count)
+    {
+        result = [self.results objectAtIndex:index];
+    }
+    
+    return result;
+}
+
+
 @end
