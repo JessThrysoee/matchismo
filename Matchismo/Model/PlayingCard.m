@@ -11,21 +11,55 @@
 @implementation PlayingCard
 @synthesize suit = _suit;
 
++ (NSString *)backImage
+{
+    return @"Images/Red_Back.svg";
+}
+
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
     
     if (otherCards.count == 1)
     {
-        PlayingCard *otherCard = [otherCards lastObject];
+        PlayingCard *secondCard = [otherCards lastObject];
         
-        if ([otherCard.suit isEqualToString:self.suit])
+        if ([secondCard.suit isEqualToString:self.suit])
         {
-            score = 1;
-        }
-        else if (otherCard.rank == self.rank)
-        {
+            // suit-suit ~ 24%
             score = 4;
+        }
+        else if (secondCard.rank == self.rank)
+        {
+            // rank-rank ~ 6%
+            score = 16;
+        }
+    }
+    
+    if (otherCards.count == 2)
+    {
+        PlayingCard *secondCard = [otherCards objectAtIndex:0];
+        PlayingCard *thirdCard = [otherCards objectAtIndex:1];
+        
+        if (secondCard.rank == self.rank && thirdCard.rank == self.rank)
+        {
+            // rank-rank-rank ~ 0.2 %
+            score = 256;
+        }
+        else if ([secondCard.suit isEqualToString:self.suit] && [thirdCard.suit isEqualToString:self.suit])
+        {
+            // suit-suit-suit ~ 5%
+            score = 16;
+        }
+        else if (secondCard.rank == self.rank || thirdCard.rank == self.rank)
+        {
+            // rank-rank-? ~ 17%
+            score = 4;
+        }
+        else if ([secondCard.suit isEqualToString:self.suit] || [thirdCard.suit isEqualToString:self.suit])
+        {
+            // suit-suit-? ~ 73%
+            score = 1;
         }
     }
     
@@ -42,9 +76,6 @@
 + (NSArray *)validSuits
 {
     static NSArray *validSuits = nil;
-    
-    
-    
     
     if (!validSuits)
     {

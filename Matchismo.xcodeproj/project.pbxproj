@@ -12,6 +12,7 @@
 		C5376EDA1731B86400644BA4 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376ED91731B86400644BA4 /* PlayingCard.m */; };
 		C5376EDD1731B87700644BA4 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */; };
 		C57B875F17359412008B725E /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B875E17359412008B725E /* CardMatchingGame.m */; };
+		C5911EF2173876CA002795CA /* cardBack.png in Resources */ = {isa = PBXBuildFile; fileRef = C5911EF1173876CA002795CA /* cardBack.png */; };
 		C5BF02AF17366C2000507F4C /* FlipResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BF02AE17366C2000507F4C /* FlipResult.m */; };
 		C5FADF471733032F00F1A585 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */; };
 		C5FBE60517319A5300FC5EBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FBE60417319A5300FC5EBA /* UIKit.framework */; };
@@ -38,6 +39,7 @@
 		C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCardDeck.m; path = Model/PlayingCardDeck.m; sourceTree = "<group>"; };
 		C57B875D17359412008B725E /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
 		C57B875E17359412008B725E /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
+		C5911EF1173876CA002795CA /* cardBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardBack.png; sourceTree = "<group>"; };
 		C5BF02AD17366C2000507F4C /* FlipResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlipResult.h; path = Model/FlipResult.h; sourceTree = "<group>"; };
 		C5BF02AE17366C2000507F4C /* FlipResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlipResult.m; path = Model/FlipResult.m; sourceTree = "<group>"; };
 		C5FADF461733032F00F1A585 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		C5FBE60A17319A5300FC5EBA /* Matchismo */ = {
 			isa = PBXGroup;
 			children = (
+				C5911EF1173876CA002795CA /* cardBack.png */,
 				C5FBE61C17319A5300FC5EBA /* MainStoryboard.storyboard */,
 				C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */,
 				C5376ED41731B7F000644BA4 /* Model */,
@@ -206,6 +209,7 @@
 				C5FBE61B17319A5300FC5EBA /* Default-568h@2x.png in Resources */,
 				C5FBE61E17319A5300FC5EBA /* MainStoryboard.storyboard in Resources */,
 				C5FADF471733032F00F1A585 /* MainStoryboard_iPad.storyboard in Resources */,
+				C5911EF2173876CA002795CA /* cardBack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

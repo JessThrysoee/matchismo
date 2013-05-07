@@ -12,8 +12,8 @@
 
 @interface FlipResult : NSObject
 
-- (void)addMatchForCard: (Card*)card andCard:(Card*)otherCard withScore:(NSUInteger)score;
-- (void)addMismatchForCard: (Card*)card andCard:(Card*)otherCard withScore:(NSUInteger)score;
+- (void)addMatchForCard: (Card*)card andCards:(NSArray*)otherCards withScore:(NSUInteger)score;
+- (void)addMismatchForCard: (Card*)card andCards:(NSArray*)otherCard withScore:(NSUInteger)score;
 - (void)addFlipForCard: (Card*)card;
 
 @property (readonly, nonatomic) NSString* lastResult;

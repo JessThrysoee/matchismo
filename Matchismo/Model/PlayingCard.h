@@ -13,9 +13,12 @@
 
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) NSUInteger rank;
+@property (readonly, nonatomic) NSString *image;
+
 - (int)match:(NSArray *)otherCards;
 
 + (NSArray *) validSuits;
 + (NSUInteger)maxRank;
+
 
 @end

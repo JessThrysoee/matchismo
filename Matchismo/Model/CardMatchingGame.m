@@ -11,13 +11,13 @@
 #import "FlipResult.h"
 
 #define FLIP_COST        -1
-#define MATCH_BONUS      4
 #define MISMATCH_PENALTY -2
 
 @interface CardMatchingGame ()
 @property (readwrite, nonatomic) int score;
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (strong, nonatomic) FlipResult *flipResult;
+@property (nonatomic) NSUInteger matchCount;
 @end
 
 
@@ -52,6 +52,7 @@
 
 
 - (id)initWithCardCount:(NSUInteger)count
+             matchCount:(NSUInteger)matchCount
               usingDeck:(Deck *)deck
 {
     self = [super init];
@@ -71,6 +72,8 @@
                 self.cards[i] = card;
             }
         }
+        
+        self.matchCount = matchCount;
     }
     
     return self;
@@ -81,6 +84,7 @@
 {
     Card *card = [self cardAtIndex:index];
     NSUInteger score = 0;
+    NSMutableArray *otherCards = [[NSMutableArray alloc] init];
     
     if (!card.isUnplayable)
     {
@@ -90,22 +94,36 @@
             {
                 if (otherCard.isFaceup && !otherCard.isUnplayable)
                 {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore)
+                    [otherCards addObject:otherCard];
+                }
+            }
+            
+            if (otherCards.count == self.matchCount - 1)
+            {
+                int matchScore = [card match:otherCards];
+                
+                if (matchScore)
+                {
+                    for (Card *otherCard in otherCards)
                     {
                         otherCard.unplayable = YES;
-                        card.unplayable = YES;
-                        score = matchScore * MATCH_BONUS;
-                        self.score += score;
-                        [self.flipResult addMatchForCard:card andCard:otherCard withScore:score];
                     }
-                    else
+                    
+                    card.unplayable = YES;
+                    score = matchScore;
+                    self.score += score;
+                    [self.flipResult addMatchForCard:card andCards:otherCards withScore:score];
+                }
+                else
+                {
+                    for (Card *otherCard in otherCards)
                     {
                         otherCard.faceUp = NO;
-                        score = MISMATCH_PENALTY;
-                        self.score += score;
-                        [self.flipResult addMismatchForCard:card andCard:otherCard withScore:score];
                     }
+                    
+                    score = MISMATCH_PENALTY;
+                    self.score += score;
+                    [self.flipResult addMismatchForCard:card andCards:otherCards withScore:score];
                 }
             }
             

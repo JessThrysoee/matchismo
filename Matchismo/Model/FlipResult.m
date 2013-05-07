@@ -24,31 +24,37 @@
     return _results;
 }
 
-- (void)addMatchForCard: (Card*)card andCard:(Card*)otherCard withScore:(NSUInteger)score
+
+- (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
 {
-    NSString *result =     [NSString stringWithFormat:@"Matched %@ & %@ for %d points", card.contents, otherCard.contents, score];
-    [self.results addObject:result];
-
-}
-
-
-- (void)addMismatchForCard: (Card*)card andCard:(Card*)otherCard withScore:(NSUInteger)score
-{
-    NSString *result =[NSString stringWithFormat:@"%@ & %@ don't match! %d point penalty", card.contents, otherCard.contents, score];
-
-    [self.results addObject:result];
+    NSString *join = [[otherCards valueForKey:@"contents"] componentsJoinedByString:@" & "];
+    NSString *result =     [NSString stringWithFormat:@"Matched %@ & %@ for %d points", card.contents, join, score];
     
+    [self.results addObject:result];
 }
 
-- (void)addFlipForCard: (Card*)card
+
+- (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
+{
+    NSString *join = [[otherCards valueForKey:@"contents"] componentsJoinedByString:@" & "];
+    NSString *result = [NSString stringWithFormat:@"%@ & %@ don't match! %d point penalty", card.contents, join, score];
+    
+    [self.results addObject:result];
+}
+
+
+- (void)addFlipForCard:(Card *)card
 {
     NSString *result = result = [NSString stringWithFormat:@"Flipped up %@", card.contents];
+    
     [self.results addObject:result];
-
 }
 
-- (NSString*)lastResult
+
+- (NSString *)lastResult
 {
     return [self.results lastObject];
 }
+
+
 @end
