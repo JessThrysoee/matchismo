@@ -11,6 +11,8 @@
 		C5376ED71731B83400644BA4 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376ED61731B83400644BA4 /* Deck.m */; };
 		C5376EDA1731B86400644BA4 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376ED91731B86400644BA4 /* PlayingCard.m */; };
 		C5376EDD1731B87700644BA4 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */; };
+		C5636FBF173EDA1C0053424F /* MatchGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5636FBE173EDA1C0053424F /* MatchGameViewController.m */; };
+		C5636FC2173EDA450053424F /* SetGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5636FC1173EDA450053424F /* SetGameViewController.m */; };
 		C57B875F17359412008B725E /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = C57B875E17359412008B725E /* CardMatchingGame.m */; };
 		C5911EF2173876CA002795CA /* cardBack.png in Resources */ = {isa = PBXBuildFile; fileRef = C5911EF1173876CA002795CA /* cardBack.png */; };
 		C5BF02AF17366C2000507F4C /* FlipResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BF02AE17366C2000507F4C /* FlipResult.m */; };
@@ -37,6 +39,10 @@
 		C5376ED91731B86400644BA4 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCard.m; path = Model/PlayingCard.m; sourceTree = "<group>"; };
 		C5376EDB1731B87700644BA4 /* PlayingCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCardDeck.h; path = Model/PlayingCardDeck.h; sourceTree = "<group>"; };
 		C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCardDeck.m; path = Model/PlayingCardDeck.m; sourceTree = "<group>"; };
+		C5636FBD173EDA1C0053424F /* MatchGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchGameViewController.h; sourceTree = "<group>"; };
+		C5636FBE173EDA1C0053424F /* MatchGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchGameViewController.m; sourceTree = "<group>"; };
+		C5636FC0173EDA450053424F /* SetGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetGameViewController.h; sourceTree = "<group>"; };
+		C5636FC1173EDA450053424F /* SetGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetGameViewController.m; sourceTree = "<group>"; };
 		C57B875D17359412008B725E /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
 		C57B875E17359412008B725E /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
 		C5911EF1173876CA002795CA /* cardBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardBack.png; sourceTree = "<group>"; };
@@ -129,6 +135,10 @@
 				C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */,
 				C5376ED41731B7F000644BA4 /* Model */,
 				C5FBE61F17319A5300FC5EBA /* CardGameViewController.h */,
+				C5636FBD173EDA1C0053424F /* MatchGameViewController.h */,
+				C5636FBE173EDA1C0053424F /* MatchGameViewController.m */,
+				C5636FC0173EDA450053424F /* SetGameViewController.h */,
+				C5636FC1173EDA450053424F /* SetGameViewController.m */,
 				C5FBE62017319A5300FC5EBA /* CardGameViewController.m */,
 				C5FBE60B17319A5300FC5EBA /* Supporting Files */,
 			);
@@ -229,6 +239,8 @@
 				C5376EDD1731B87700644BA4 /* PlayingCardDeck.m in Sources */,
 				C57B875F17359412008B725E /* CardMatchingGame.m in Sources */,
 				C5BF02AF17366C2000507F4C /* FlipResult.m in Sources */,
+				C5636FBF173EDA1C0053424F /* MatchGameViewController.m in Sources */,
+				C5636FC2173EDA450053424F /* SetGameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
