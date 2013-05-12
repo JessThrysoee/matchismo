@@ -49,6 +49,7 @@
 		C578E85B173FC662000B97A2 /* SetCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCard.m; path = Model/SetCard.m; sourceTree = "<group>"; };
 		C578E85D173FD5FB000B97A2 /* SetCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCardDeck.h; path = Model/SetCardDeck.h; sourceTree = "<group>"; };
 		C578E85E173FD5FB000B97A2 /* SetCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCardDeck.m; path = Model/SetCardDeck.m; sourceTree = "<group>"; };
+		C578E860174050E1000B97A2 /* CardRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardRenderer.h; sourceTree = "<group>"; };
 		C57B875D17359412008B725E /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
 		C57B875E17359412008B725E /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
 		C5911EF1173876CA002795CA /* cardBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardBack.png; sourceTree = "<group>"; };
@@ -104,8 +105,6 @@
 				C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */,
 				C578E85D173FD5FB000B97A2 /* SetCardDeck.h */,
 				C578E85E173FD5FB000B97A2 /* SetCardDeck.m */,
-				C5BF02AD17366C2000507F4C /* FlipResult.h */,
-				C5BF02AE17366C2000507F4C /* FlipResult.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -140,11 +139,14 @@
 		C5FBE60A17319A5300FC5EBA /* Matchismo */ = {
 			isa = PBXGroup;
 			children = (
+				C578E860174050E1000B97A2 /* CardRenderer.h */,
 				C5911EF1173876CA002795CA /* cardBack.png */,
 				C5FBE61C17319A5300FC5EBA /* MainStoryboard.storyboard */,
 				C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */,
 				C5376ED41731B7F000644BA4 /* Model */,
 				C5FBE61F17319A5300FC5EBA /* CardGameViewController.h */,
+				C5BF02AD17366C2000507F4C /* FlipResult.h */,
+				C5BF02AE17366C2000507F4C /* FlipResult.m */,
 				C5636FBD173EDA1C0053424F /* MatchGameViewController.h */,
 				C5636FBE173EDA1C0053424F /* MatchGameViewController.m */,
 				C5636FC0173EDA450053424F /* SetGameViewController.h */,

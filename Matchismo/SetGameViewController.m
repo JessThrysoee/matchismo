@@ -18,7 +18,7 @@
 
 @implementation SetGameViewController
 
-#define MATCH_COUNT 2
+#define MATCH_COUNT 3
 
 
 - (void)updateUI
@@ -32,22 +32,32 @@
     if ([card isKindOfClass:[SetCard class]])
     {
         SetCard *setCard = (SetCard *)card;
-        NSAttributedString *buttonTitle = [self buttonTitle:setCard];
+        NSAttributedString *buttonTitle = [self renderCard:setCard];
         
         button.layer.borderColor = [UIColor blackColor].CGColor;
         button.layer.borderWidth = 0.5f;
         button.layer.cornerRadius = 10.0f;
         
         [button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
-        [button setAttributedTitle:buttonTitle forState:UIControlStateSelected];
-        [button setAttributedTitle:buttonTitle forState:UIControlStateSelected | UIControlStateDisabled];
+        
+        button.alpha = card.isUnplayable ? 0 : 1;
+        if (card.isFaceup)
+        {
+            button.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0];
+        }
+        else
+        {
+            button.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.1];
+        }
     }
 }
 
 
-- (NSAttributedString *)buttonTitle:(SetCard *)card
+- (NSAttributedString *)renderCard:(Card *)plainCard
 {
     NSString *plain = @"";
+    
+    SetCard *card = (SetCard*)plainCard;
     
     // solid
     UIColor *stroke = [self colors][card.color - 1];

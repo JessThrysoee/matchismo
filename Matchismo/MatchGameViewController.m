@@ -49,6 +49,8 @@
         [button setImage:cardBackImage forState:UIControlStateNormal];
         [button setImage:cardFrontImage forState:UIControlStateSelected];
         [button setImage:cardFrontImage forState:UIControlStateSelected | UIControlStateDisabled];
+        
+        button.alpha = card.isUnplayable ? 0.3 : 1.0;
     }
 }
 

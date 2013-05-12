@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CardMatchingGame.h"
+#import "CardRenderer.h"
 
-@interface CardGameViewController : UIViewController
+@interface CardGameViewController : UIViewController <CardRenderer>
 
 - (void)updateUI;
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card;

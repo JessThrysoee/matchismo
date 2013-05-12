@@ -44,7 +44,7 @@
 {
     if (!_flipResult)
     {
-        _flipResult = [[FlipResult alloc] init];
+        _flipResult = [[FlipResult alloc] initWithCardRenderer:self];
     }
     
     return _flipResult;
@@ -86,17 +86,17 @@
     {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         
-        [self updateUIForButton:cardButton card:card];
-        
         cardButton.selected = card.isFaceup;
         cardButton.enabled = !card.isUnplayable;
-        // TODO maybe not for set, but only for playing card
-        //cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
+        
+        [self updateUIForButton:cardButton card:card];
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.resultLabel.text = self.flipResult.lastResult;
+    self.resultLabel.attributedText = self.flipResult.lastResult;
+    self.resultLabel.textAlignment = NSTextAlignmentCenter;
 }
+
 
 
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
@@ -117,6 +117,11 @@
 - (IBAction)deal
 {
     [self reset];
+}
+
+-(NSAttributedString*)renderCard:(Card*)card
+{
+    return [[NSAttributedString alloc] initWithString:card.contents];
 }
 
 @end
