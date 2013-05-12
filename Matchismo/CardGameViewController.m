@@ -15,10 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
-@property (nonatomic) int flipCount;
 @property (strong, nonatomic)IBOutletCollection(UIButton) NSArray * cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
+@property (nonatomic) int flipCount;
 @property (strong, nonatomic) FlipResult *flipResult;
+@property (readonly, nonatomic) NSUInteger matchCount;
+@property (strong, nonatomic) Deck *deck;
 @end
 
 @implementation CardGameViewController
@@ -29,8 +31,8 @@
     if (!_game)
     {
         _game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
-                                                 matchCount:2
-                                                  usingDeck:[[PlayingCardDeck alloc] init]
+                                                 matchCount:self.matchCount
+                                                  usingDeck:self.deck
                                                  flipResult:self.flipResult];
     }
     
@@ -84,22 +86,22 @@
     {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected | UIControlStateDisabled];
-        
-        UIImage *cardBackImage = [UIImage imageNamed:@"cardBack.png"];
-        UIImage *cardFrontImage = [[UIImage alloc] init];
-        [cardButton setImage:cardBackImage forState:UIControlStateNormal];
-        [cardButton setImage:cardFrontImage forState:UIControlStateSelected];
-        [cardButton setImage:cardFrontImage forState:UIControlStateSelected | UIControlStateDisabled];
+        [self updateUIForButton:cardButton card:card];
         
         cardButton.selected = card.isFaceup;
         cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
+        // TODO maybe not for set, but only for playing card
+        //cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.resultLabel.text = self.flipResult.lastResult;
+}
+
+
+- (void)updateUIForButton:(UIButton *)button card:(Card *)card
+{
+    
 }
 
 

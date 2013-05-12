@@ -7,32 +7,52 @@
 //
 
 #import "MatchGameViewController.h"
+#import "PlayingCard.h"
+#import "PlayingCardDeck.h"
 
 @interface MatchGameViewController ()
+@property (readonly, nonatomic) NSUInteger matchCount;
+@property (strong, nonatomic) Deck *deck;
 
 @end
 
 @implementation MatchGameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#define MATCH_COUNT 2
+
+- (NSUInteger)matchCount
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    return MATCH_COUNT;
+}
+
+- (Deck *)deck
+{
+    return [[PlayingCardDeck alloc] init];
+}
+
+
+- (void)updateUI
+{
+    [super updateUI];
+}
+
+
+- (void)updateUIForButton:(UIButton *)button card:(Card *)card
+{
+    if ([card isKindOfClass:[PlayingCard class]])
+    {
+        [button setTitle:card.contents forState:UIControlStateSelected];
+        [button setTitle:card.contents forState:UIControlStateSelected | UIControlStateDisabled];
+        
+        UIImage *cardBackImage = [UIImage imageNamed:@"cardBack.png"];
+        UIImage *cardFrontImage = [[UIImage alloc] init];
+        [button setImage:cardBackImage forState:UIControlStateNormal];
+        [button setImage:cardFrontImage forState:UIControlStateSelected];
+        [button setImage:cardFrontImage forState:UIControlStateSelected | UIControlStateDisabled];
     }
-    return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

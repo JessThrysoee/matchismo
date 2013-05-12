@@ -7,32 +7,111 @@
 //
 
 #import "SetGameViewController.h"
+#import "SetCard.h"
+#import "SetCardDeck.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SetGameViewController ()
-
+@property (readonly, nonatomic) NSUInteger matchCount;
+@property (strong, nonatomic) Deck *deck;
 @end
 
 @implementation SetGameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#define MATCH_COUNT 2
+
+
+- (void)updateUI
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    [super updateUI];
+}
+
+
+- (void)updateUIForButton:(UIButton *)button card:(Card *)card
+{
+    if ([card isKindOfClass:[SetCard class]])
+    {
+        SetCard *setCard = (SetCard *)card;
+        NSAttributedString *buttonTitle = [self buttonTitle:setCard];
+        
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.borderWidth = 0.5f;
+        button.layer.cornerRadius = 10.0f;
+        
+        [button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
+        [button setAttributedTitle:buttonTitle forState:UIControlStateSelected];
+        [button setAttributedTitle:buttonTitle forState:UIControlStateSelected | UIControlStateDisabled];
     }
-    return self;
 }
 
-- (void)viewDidLoad
+
+- (NSAttributedString *)buttonTitle:(SetCard *)card
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    NSString *plain = @"";
+    
+    // solid
+    UIColor *stroke = [self colors][card.color - 1];
+    UIColor *fill = stroke;
+    
+    if (card.shading == 2)
+    {
+        // striped
+        fill = [UIColor grayColor];
+    }
+    else if (card.shading == 3)
+    {
+        // open
+        fill = [UIColor clearColor];
+    }
+    
+    for (NSUInteger number = 0; number < card.number; number++)
+    {
+        plain = [plain stringByAppendingString:[self symbols][card.symbol - 1]];
+    }
+    
+    return [[NSAttributedString alloc] initWithString:plain
+                                           attributes:@{ NSForegroundColorAttributeName: fill,
+                           NSStrokeColorAttributeName: stroke,
+                           NSStrokeWidthAttributeName: @ - 10 }];
 }
 
-- (void)didReceiveMemoryWarning
+
+- (NSArray *)symbols
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    static NSArray *symbols = nil;
+    
+    if (!symbols)
+    {
+        symbols = @[@"▲", @"●", @"■"]; // diamond, squiggle, oval
+    }
+    
+    return symbols;
 }
+
+
+- (NSArray *)colors
+{
+    static NSArray *colors = nil;
+    
+    if (!colors)
+    {
+        colors = @[[UIColor redColor], [UIColor greenColor], [UIColor purpleColor]];  //(red, green, or purple)
+    }
+    
+    return colors;
+}
+
+
+- (NSUInteger)matchCount
+{
+    return MATCH_COUNT;
+}
+
+
+- (Deck *)deck
+{
+    return [[SetCardDeck alloc] init];
+}
+
 
 @end
