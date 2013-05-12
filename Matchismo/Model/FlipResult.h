@@ -13,7 +13,7 @@
 
 @interface FlipResult : NSObject
 
--(id)initWithCardRenderer:(id<CardRenderer>)renderer;
+- (id)initWithCardRenderer:(id<CardRenderer>)renderer;
 
 @property (readonly, nonatomic) NSAttributedString *lastResult;
 @property (readonly, nonatomic) NSUInteger count;

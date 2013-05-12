@@ -10,5 +10,5 @@
 #import "Card.h"
 
 @protocol CardRenderer <NSObject>
--(NSAttributedString*)renderCard:(Card*)card;
+- (NSAttributedString *)renderCard:(Card *)card;
 @end

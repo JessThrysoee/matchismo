@@ -25,6 +25,7 @@
     return MATCH_COUNT;
 }
 
+
 - (Deck *)deck
 {
     return [[PlayingCardDeck alloc] init];
@@ -53,8 +54,6 @@
         button.alpha = card.isUnplayable ? 0.3 : 1.0;
     }
 }
-
-
 
 
 @end

@@ -98,10 +98,8 @@
 }
 
 
-
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
 {
-    
 }
 
 
@@ -119,9 +117,11 @@
     [self reset];
 }
 
--(NSAttributedString*)renderCard:(Card*)card
+
+- (NSAttributedString *)renderCard:(Card *)card
 {
     return [[NSAttributedString alloc] initWithString:card.contents];
 }
+
 
 @end

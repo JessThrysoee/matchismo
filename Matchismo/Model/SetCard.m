@@ -93,8 +93,11 @@
     }
 }
 
--(NSString*)contents
+
+- (NSString *)contents
 {
     return [NSString stringWithFormat:@"%d-%d-%d-%d", self.number, self.symbol, self.shading, self.color];
 }
+
+
 @end

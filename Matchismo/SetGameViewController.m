@@ -41,6 +41,7 @@
         [button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
         
         button.alpha = card.isUnplayable ? 0 : 1;
+        
         if (card.isFaceup)
         {
             button.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0];
@@ -57,7 +58,7 @@
 {
     NSString *plain = @"";
     
-    SetCard *card = (SetCard*)plainCard;
+    SetCard *card = (SetCard *)plainCard;
     
     // solid
     UIColor *stroke = [self colors][card.color - 1];
