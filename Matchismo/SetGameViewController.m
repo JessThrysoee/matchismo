@@ -21,12 +21,6 @@
 #define MATCH_COUNT 3
 
 
-- (void)updateUI
-{
-    [super updateUI];
-}
-
-
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
 {
     if ([card isKindOfClass:[SetCard class]])

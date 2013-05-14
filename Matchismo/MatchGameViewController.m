@@ -32,12 +32,6 @@
 }
 
 
-- (void)updateUI
-{
-    [super updateUI];
-}
-
-
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
 {
     if ([card isKindOfClass:[PlayingCard class]])

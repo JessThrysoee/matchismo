@@ -10,7 +10,4 @@
 
 @interface MatchGameViewController : CardGameViewController
 
-- (void)updateUI;
-- (void)updateUIForButton:(UIButton *)button card:(Card *)card;
-
 @end

@@ -12,7 +12,6 @@
 
 @interface CardGameViewController : UIViewController <CardRenderer>
 
-- (void)updateUI;
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card;
 
 @end
