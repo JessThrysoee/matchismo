@@ -7,21 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CardRenderer.h"
+#import "CardRendererProtocol.h"
 #import "Card.h"
+#import "FlipResultProtocol.h"
 
 
-@interface FlipResult : NSObject
+@interface FlipResult : NSObject <FlipResultProtocol>
 
-- (id)initWithCardRenderer:(id<CardRenderer>)renderer;
+- (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer;
 
 @property (readonly, nonatomic) NSAttributedString *lastResult;
 @property (readonly, nonatomic) NSUInteger count;
 
-- (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score;
-- (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCard withScore:(NSUInteger)score;
-- (void)addFlipForCard:(Card *)card;
 - (NSString *)resultAtIndex:(NSUInteger)index;
-
 
 @end

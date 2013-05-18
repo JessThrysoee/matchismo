@@ -10,12 +10,12 @@
 
 @interface FlipResult ()
 @property (strong, nonatomic) NSMutableArray *results;
-@property (weak, nonatomic) id <CardRenderer> renderer;
+@property (weak, nonatomic) id <CardRendererProtocol> renderer;
 @end
 
 @implementation FlipResult
 
-- (id)initWithCardRenderer:(id<CardRenderer>)renderer
+- (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer
 {
     self = [super init];
     

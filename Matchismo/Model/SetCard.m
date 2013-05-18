@@ -44,7 +44,7 @@
             [self matchFeature:@"shading" cards:otherCards] &&
             [self matchFeature:@"color" cards:otherCards])
         {
-            score = 1;
+            score = 10;
         }
     }
     

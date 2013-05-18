@@ -8,7 +8,7 @@
 
 #import "CardMatchingGame.h"
 #import "Deck.h"
-#import "FlipResult.h"
+#import "FlipResultProtocol.h"
 
 #define FLIP_COST        -1
 #define MISMATCH_PENALTY -2
@@ -16,7 +16,7 @@
 @interface CardMatchingGame ()
 @property (readwrite, nonatomic) int score;
 @property (strong, nonatomic) NSMutableArray *cards;
-@property (weak, nonatomic) FlipResult *flipResult;
+@property (weak, nonatomic) id <FlipResultProtocol> flipResult;
 @property (readonly, nonatomic) NSString *flipResultCount;
 @property (nonatomic) NSUInteger matchCount;
 @end
@@ -38,7 +38,7 @@
 - (id)initWithCardCount:(NSUInteger)count
              matchCount:(NSUInteger)matchCount
               usingDeck:(Deck *)deck
-             flipResult:(FlipResult *)flipResult
+             flipResult:(id <FlipResultProtocol>)flipResult
 {
     self = [super init];
     

@@ -13,7 +13,6 @@
 @interface MatchGameViewController ()
 @property (readonly, nonatomic) NSUInteger matchCount;
 @property (strong, nonatomic) Deck *deck;
-
 @end
 
 @implementation MatchGameViewController

@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Card.h"
 
-@protocol CardRenderer <NSObject>
+@protocol CardRendererProtocol <NSObject>
 - (NSAttributedString *)renderCard:(Card *)card;
 @end
