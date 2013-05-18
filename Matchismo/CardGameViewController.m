@@ -10,20 +10,49 @@
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 #import "FlipResult.h"
+#import "SetCardCollectionViewCell.h"
 
-@interface CardGameViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
+@interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic)IBOutletCollection(UIButton) NSArray * cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
-@property (nonatomic) int flipCount;
 @property (strong, nonatomic) FlipResult *flipResult;
 @property (readonly, nonatomic) NSUInteger matchCount;
 @property (strong, nonatomic) Deck *deck;
+@property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @end
 
 @implementation CardGameViewController
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    // TODO
+    return 3; // return [myDataModel count];
+}
+
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [self.cardCollectionView dequeueReusableCellWithReuseIdentifier:@"SetCard" forIndexPath:indexPath];
+    
+    if ([cell isKindOfClass [SetCardCollectionViewCell class]])
+    {
+        SetCardCollectionViewCell *setCardCell = (SetCardCollectionViewCell *)cell;
+        
+        //[setCardCell ]
+    }
+    
+    return cell;
+}
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
 
 
 - (CardMatchingGame *)game
@@ -51,24 +80,11 @@
 }
 
 
-- (void)setFlipCount:(int)flipCount
-{
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-}
-
-
 - (IBAction)flipCard:(UIButton *)sender
 {
     NSUInteger index = [self.cardButtons indexOfObject:sender];
     
     [self.game flipCardAtIndex:index];
-    
-    if ([self.game cardAtIndex:index].isFaceup)
-    {
-        self.flipCount++;
-    }
-    
     [self updateUI];
 }
 
@@ -107,7 +123,6 @@
 {
     self.game = nil;
     self.flipResult = nil;
-    self.flipCount = 0;
     [self updateUI];
 }
 
