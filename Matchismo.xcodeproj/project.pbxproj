@@ -45,8 +45,8 @@
 		C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCardDeck.m; path = Model/PlayingCardDeck.m; sourceTree = "<group>"; };
 		C53FE305174809E2000E4F3D /* SetCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCardCollectionViewCell.h; sourceTree = "<group>"; };
 		C53FE306174809E2000E4F3D /* SetCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCardCollectionViewCell.m; sourceTree = "<group>"; };
-		C53FE30817480EF9000E4F3D /* SetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCardView.h; path = Matchismo/SetCardView.h; sourceTree = "<group>"; };
-		C53FE30917480EF9000E4F3D /* SetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCardView.m; path = Matchismo/SetCardView.m; sourceTree = "<group>"; };
+		C53FE30817480EF9000E4F3D /* SetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCardView.h; sourceTree = "<group>"; };
+		C53FE30917480EF9000E4F3D /* SetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCardView.m; sourceTree = "<group>"; };
 		C54D278E174789E900F84DE4 /* FlipResultProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipResultProtocol.h; sourceTree = "<group>"; };
 		C5636FBD173EDA1C0053424F /* MatchGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchGameViewController.h; sourceTree = "<group>"; };
 		C5636FBE173EDA1C0053424F /* MatchGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchGameViewController.m; sourceTree = "<group>"; };
@@ -119,8 +119,6 @@
 		C5FBE5F817319A5300FC5EBA = {
 			isa = PBXGroup;
 			children = (
-				C53FE30817480EF9000E4F3D /* SetCardView.h */,
-				C53FE30917480EF9000E4F3D /* SetCardView.m */,
 				C5FBE60A17319A5300FC5EBA /* Matchismo */,
 				C5FBE60317319A5300FC5EBA /* Frameworks */,
 				C5FBE60217319A5300FC5EBA /* Products */,
@@ -148,6 +146,8 @@
 		C5FBE60A17319A5300FC5EBA /* Matchismo */ = {
 			isa = PBXGroup;
 			children = (
+				C53FE30817480EF9000E4F3D /* SetCardView.h */,
+				C53FE30917480EF9000E4F3D /* SetCardView.m */,
 				C5FBE61C17319A5300FC5EBA /* MainStoryboard.storyboard */,
 				C5FADF451733032F00F1A585 /* MainStoryboard_iPad.storyboard */,
 				C578E860174050E1000B97A2 /* CardRendererProtocol.h */,
