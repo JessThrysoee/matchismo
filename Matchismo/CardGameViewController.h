@@ -11,6 +11,7 @@
 #import "CardRendererProtocol.h"
 
 @interface CardGameViewController : UIViewController <CardRendererProtocol>
+@property (readonly, nonatomic) NSString * reuseIdentifier;
 
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card;
 

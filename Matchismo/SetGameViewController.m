@@ -20,6 +20,10 @@
 
 #define MATCH_COUNT 3
 
+-(NSString*)reuseIdentifier
+{
+    return @"Card";
+}
 
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
 {

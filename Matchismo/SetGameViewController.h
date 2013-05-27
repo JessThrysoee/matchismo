@@ -9,5 +9,6 @@
 #import "CardGameViewController.h"
 
 @interface SetGameViewController : CardGameViewController
+@property (readonly, nonatomic) NSString * reuseIdentifier;
 
 @end

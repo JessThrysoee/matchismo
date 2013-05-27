@@ -10,9 +10,11 @@
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 #import "FlipResult.h"
+#import "PlayingCardCollectionViewCell.h"
+#import "PlayingCardView.h"
 #import "SetCardCollectionViewCell.h"
 
-@interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic)IBOutletCollection(UIButton) NSArray * cardButtons;
@@ -36,13 +38,13 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [self.cardCollectionView dequeueReusableCellWithReuseIdentifier:@"SetCard" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [self.cardCollectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
     
-    if ([cell isKindOfClass [SetCardCollectionViewCell class]])
+    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]])
     {
-        SetCardCollectionViewCell *setCardCell = (SetCardCollectionViewCell *)cell;
-        
-        //[setCardCell ]
+        PlayingCardCollectionViewCell *playingCardCell = (PlayingCardCollectionViewCell *)cell;
+        playingCardCell.playingCardView.suit = @"K";
+        playingCardCell.playingCardView.rank = 2;
     }
     
     return cell;
