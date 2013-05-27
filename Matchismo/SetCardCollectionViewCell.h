@@ -10,6 +10,6 @@
 #import "SetCardView.h"
 
 @interface SetCardCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet SetCardView *setCardView;
+@property (weak, nonatomic) IBOutlet SetCardView *cardView;
 
 @end

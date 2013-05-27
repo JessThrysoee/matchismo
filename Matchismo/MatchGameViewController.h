@@ -10,6 +10,4 @@
 
 @interface MatchGameViewController : CardGameViewController
 
-@property (readonly, nonatomic) NSString * reuseIdentifier;
-
 @end

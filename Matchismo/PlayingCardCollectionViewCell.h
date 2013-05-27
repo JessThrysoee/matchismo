@@ -10,6 +10,6 @@
 #import "PlayingCardView.h"
 
 @interface PlayingCardCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
+@property (weak, nonatomic) IBOutlet PlayingCardView *cardView;
 
 @end

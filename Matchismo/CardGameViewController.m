@@ -17,11 +17,9 @@
 @interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
-@property (strong, nonatomic)IBOutletCollection(UIButton) NSArray * cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) FlipResult *flipResult;
 @property (readonly, nonatomic) NSUInteger matchCount;
-@property (strong, nonatomic) Deck *deck;
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @end
 
@@ -31,25 +29,30 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     // TODO
-    return 3; // return [myDataModel count];
+    return self.startingCardCount; // return [myDataModel count];
 }
 
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [self.cardCollectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-    
-    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]])
-    {
-        PlayingCardCollectionViewCell *playingCardCell = (PlayingCardCollectionViewCell *)cell;
-        playingCardCell.playingCardView.suit = @"K";
-        playingCardCell.playingCardView.rank = 2;
-    }
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Card" forIndexPath:indexPath];
+    Card *card = [self.game cardAtIndex:indexPath.item];
+    [self updateCell:cell usingCard:card];
     
     return cell;
 }
 
+-(Deck*)createDeck
+{
+    // abstract
+    return nil;
+}
+
+-(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
+{
+    // abstract
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -61,9 +64,9 @@
 {
     if (!_game)
     {
-        _game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
+        _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount
                                                  matchCount:self.matchCount
-                                                  usingDeck:self.deck
+                                                  usingDeck:[self createDeck]
                                                  flipResult:self.flipResult];
     }
     
@@ -82,37 +85,45 @@
 }
 
 
-- (IBAction)flipCard:(UIButton *)sender
+- (IBAction)flipCard:(UITapGestureRecognizer *)gesture
 {
-    NSUInteger index = [self.cardButtons indexOfObject:sender];
     
-    [self.game flipCardAtIndex:index];
-    [self updateUI];
+    CGPoint tapLocation = [gesture locationInView:self.cardCollectionView];
+    NSIndexPath * indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    if (indexPath)
+    {
+        [self.game flipCardAtIndex:indexPath.item];
+        [self updateUI];
+        
+    }
 }
 
-
-- (void)setCardButtons:(NSArray *)cardButtons
-{
-    _cardButtons = cardButtons;
-    [self updateUI];
-}
 
 
 - (void)updateUI
 {
-    for (UIButton *cardButton in self.cardButtons)
-    {
-        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        
-        cardButton.selected = card.isFaceup;
-        cardButton.enabled = !card.isUnplayable;
-        
-        [self updateUIForButton:cardButton card:card];
-    }
     
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.resultLabel.attributedText = self.flipResult.lastResult;
-    self.resultLabel.textAlignment = NSTextAlignmentCenter;
+    for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells])
+    {
+        NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        [self updateCell:cell usingCard:card];
+        
+        
+    }
+//    for (UIButton *cardButton in self.cardButtons)
+//    {
+//        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
+//        
+//        cardButton.selected = card.isFaceup;
+//        cardButton.enabled = !card.isUnplayable;
+//        
+//        [self updateUIForButton:cardButton card:card];
+//    }
+//    
+//    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+//    self.resultLabel.attributedText = self.flipResult.lastResult;
+//    self.resultLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 

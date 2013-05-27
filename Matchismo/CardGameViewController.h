@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CardMatchingGame.h"
 #import "CardRendererProtocol.h"
+#import "Deck.h"
 
 @interface CardGameViewController : UIViewController <CardRendererProtocol>
-@property (readonly, nonatomic) NSString * reuseIdentifier;
 
-- (void)updateUIForButton:(UIButton *)button card:(Card *)card;
+// TODO remove
+//- (void)updateUIForButton:(UIButton *)button card:(Card *)card;
+
+-(Deck*)createDeck;  // abstract
+@property (nonatomic) NSUInteger startingCardCount;   // abstract
+-(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card;   // abstract
 
 @end

@@ -10,6 +10,7 @@
 #import "SetCard.h"
 #import "SetCardDeck.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SetCardCollectionViewCell.h"
 
 @interface SetGameViewController ()
 @property (readonly, nonatomic) NSUInteger matchCount;
@@ -20,9 +21,27 @@
 
 #define MATCH_COUNT 3
 
--(NSString*)reuseIdentifier
+
+- (Deck *)createDeck
 {
-    return @"Card";
+    return [[SetCardDeck alloc] init];
+}
+
+
+- (NSUInteger)startingCardCount
+{
+    return 20;
+}
+
+-(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
+{
+    if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
+    {
+        SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
+        // TODO
+        //cardCell.cardView.suit = @"K";
+        //cardCell.cardView.rank = 2;
+    }
 }
 
 - (void)updateUIForButton:(UIButton *)button card:(Card *)card
@@ -116,11 +135,6 @@
     return MATCH_COUNT;
 }
 
-
-- (Deck *)deck
-{
-    return [[SetCardDeck alloc] init];
-}
 
 
 @end

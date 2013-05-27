@@ -73,6 +73,7 @@
                                             <constraint firstItem="TDR-MQ-N6m" firstAttribute="top" secondItem="oK2-DD-GBH" secondAttribute="top" type="default" id="kXA-fQ-Y5k"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="cardView" destination="TDR-MQ-N6m" id="Iz6-2l-z3O"/>
                                             <outlet property="setCardView" destination="TDR-MQ-N6m" id="Ec0-X6-szI"/>
                                         </connections>
                                     </collectionViewCell>
@@ -169,6 +170,7 @@
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-UE-wBm">
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V4x-9r-kCH">
                                     <size key="itemSize" width="144" height="189"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -185,6 +187,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woJ-1r-Zid" customClass="PlayingCardView">
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <gestureRecognizers/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -196,12 +199,13 @@
                                             <constraint firstItem="woJ-1r-Zid" firstAttribute="trailing" secondItem="NC1-RG-SG1" secondAttribute="trailing" type="default" id="ujz-pE-N89"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="playingCardView" destination="woJ-1r-Zid" id="Asv-3J-Led"/>
+                                            <outlet property="cardView" destination="woJ-1r-Zid" id="ksy-dO-w47"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="OAh-DP-oF0"/>
+                                    <outletCollection property="gestureRecognizers" destination="KIM-Qb-nzh" appends="YES" id="0eg-G4-PR8"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -228,6 +232,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="KIM-Qb-nzh">
+                    <connections>
+                        <action selector="flipCard:" destination="2" id="2od-Kg-K5K"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1502" y="-1002"/>
         </scene>
@@ -236,7 +245,7 @@
         <class className="CardGameViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
             <relationships>
-                <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
+                <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
@@ -252,7 +261,7 @@
         <class className="PlayingCardCollectionViewCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardCollectionViewCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="playingCardView" candidateClass="PlayingCardView"/>
+                <relationship kind="outlet" name="cardView" candidateClass="PlayingCardView"/>
             </relationships>
         </class>
         <class className="PlayingCardView" superclassName="UIView">
@@ -261,7 +270,7 @@
         <class className="SetCardCollectionViewCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardCollectionViewCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="setCardView" candidateClass="SetCardView"/>
+                <relationship kind="outlet" name="cardView" candidateClass="SetCardView"/>
             </relationships>
         </class>
         <class className="SetCardView" superclassName="UICollectionViewCell">
