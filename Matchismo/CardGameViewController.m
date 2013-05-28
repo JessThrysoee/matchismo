@@ -25,18 +25,21 @@
 
 @implementation CardGameViewController
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     
     //[self cardCollectionView].collectionViewLayout.section
 }
 
+
 #define MARGIN 20
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(MARGIN, MARGIN,MARGIN,MARGIN);
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(MARGIN, MARGIN, MARGIN, MARGIN);
 }
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -45,26 +48,29 @@
 }
 
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Card" forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
+    
     [self updateCell:cell usingCard:card];
     
     return cell;
 }
 
--(Deck*)createDeck
+
+- (Deck *)createDeck
 {
     // abstract
     return nil;
 }
 
--(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {
     // abstract
 }
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -99,43 +105,29 @@
 
 - (IBAction)flipCard:(UITapGestureRecognizer *)gesture
 {
-    
     CGPoint tapLocation = [gesture locationInView:self.cardCollectionView];
-    NSIndexPath * indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    
     if (indexPath)
     {
         [self.game flipCardAtIndex:indexPath.item];
         [self updateUI];
-        
     }
 }
 
 
-
 - (void)updateUI
 {
-    
     for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells])
     {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         Card *card = [self.game cardAtIndex:indexPath.item];
         [self updateCell:cell usingCard:card];
-        
-        
     }
-//    for (UIButton *cardButton in self.cardButtons)
-//    {
-//        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-//        
-//        cardButton.selected = card.isFaceup;
-//        cardButton.enabled = !card.isUnplayable;
-//        
-//        [self updateUIForButton:cardButton card:card];
-//    }
-//    
-//    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-//    self.resultLabel.attributedText = self.flipResult.lastResult;
-//    self.resultLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.resultLabel.attributedText = self.flipResult.lastResult;
+    self.resultLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 
