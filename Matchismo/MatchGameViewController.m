@@ -19,6 +19,7 @@
 @implementation MatchGameViewController
 
 #define MATCH_COUNT 2
+#define START_CARD_COUNT 22
 
 - (NSUInteger)matchCount
 {
@@ -32,7 +33,7 @@
 
 - (NSUInteger)startingCardCount
 {
-    return 20;
+    return START_CARD_COUNT;
 }
 
 -(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card

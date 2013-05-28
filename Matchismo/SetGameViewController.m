@@ -20,6 +20,7 @@
 @implementation SetGameViewController
 
 #define MATCH_COUNT 3
+#define START_CARD_COUNT 12
 
 
 - (Deck *)createDeck
@@ -30,7 +31,7 @@
 
 - (NSUInteger)startingCardCount
 {
-    return 20;
+    return START_CARD_COUNT;
 }
 
 -(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
