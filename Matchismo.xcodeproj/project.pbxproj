@@ -158,14 +158,8 @@
 				C5376ED21731B7C400644BA4 /* Card.m */,
 				C5376ED51731B83400644BA4 /* Deck.h */,
 				C5376ED61731B83400644BA4 /* Deck.m */,
-				C5376ED81731B86400644BA4 /* PlayingCard.h */,
-				C578E85A173FC662000B97A2 /* SetCard.h */,
-				C578E85B173FC662000B97A2 /* SetCard.m */,
-				C5376ED91731B86400644BA4 /* PlayingCard.m */,
-				C5376EDB1731B87700644BA4 /* PlayingCardDeck.h */,
-				C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */,
-				C578E85D173FD5FB000B97A2 /* SetCardDeck.h */,
-				C578E85E173FD5FB000B97A2 /* SetCardDeck.m */,
+				C55DB9CE175F78FC00F72D35 /* Set */,
+				C55DB9CF175F791500F72D35 /* Match */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -192,6 +186,28 @@
 				C5F852DF1753ED2A00767181 /* PlayingCardCollectionViewCell.m */,
 				C5636FBD173EDA1C0053424F /* MatchGameViewController.h */,
 				C5636FBE173EDA1C0053424F /* MatchGameViewController.m */,
+			);
+			name = Match;
+			sourceTree = "<group>";
+		};
+		C55DB9CE175F78FC00F72D35 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				C578E85A173FC662000B97A2 /* SetCard.h */,
+				C578E85B173FC662000B97A2 /* SetCard.m */,
+				C578E85D173FD5FB000B97A2 /* SetCardDeck.h */,
+				C578E85E173FD5FB000B97A2 /* SetCardDeck.m */,
+			);
+			name = Set;
+			sourceTree = "<group>";
+		};
+		C55DB9CF175F791500F72D35 /* Match */ = {
+			isa = PBXGroup;
+			children = (
+				C5376ED81731B86400644BA4 /* PlayingCard.h */,
+				C5376ED91731B86400644BA4 /* PlayingCard.m */,
+				C5376EDB1731B87700644BA4 /* PlayingCardDeck.h */,
+				C5376EDC1731B87700644BA4 /* PlayingCardDeck.m */,
 			);
 			name = Match;
 			sourceTree = "<group>";

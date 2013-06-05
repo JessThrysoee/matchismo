@@ -39,9 +39,16 @@
     if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
     {
         SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
-        // TODO
-        //cardCell.cardView.suit = @"K";
-        //cardCell.cardView.rank = 2;
+        if ([card isKindOfClass: [SetCard class]]) {
+            SetCard *setCard = (SetCard*)card;
+            cardView.number = setCard.number;
+            cardView.symbol = setCard.symbol;
+            cardView.color = setCard.color ;
+            cardView.shading = setCard.shading;
+            
+            cardView.faceUp = setCard.isFaceup;
+            cardView.alpha = setCard.isUnplayable ? 0.3 : 1.0;
+        }
     }
 }
 

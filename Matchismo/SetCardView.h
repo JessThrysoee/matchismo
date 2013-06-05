@@ -10,4 +10,12 @@
 
 @interface SetCardView : UICollectionViewCell
 
+@property (nonatomic) NSUInteger number;  // [1-3]
+@property (nonatomic) NSUInteger symbol;  // [1-3]
+@property (nonatomic) NSUInteger shading;
+@property (nonatomic) NSUInteger color;
+
+
+@property (nonatomic) BOOL faceUp;
+
 @end
