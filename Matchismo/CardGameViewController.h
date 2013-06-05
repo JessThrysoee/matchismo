@@ -12,10 +12,7 @@
 
 @interface CardGameViewController : UIViewController <CardRendererProtocol>
 
-// TODO remove
-//- (void)updateUIForButton:(UIButton *)button card:(Card *)card;
-
--(Deck*)createDeck;  // abstract
+@property (strong, nonatomic) Deck* deck;
 @property (nonatomic) NSUInteger startingCardCount;   // abstract
 -(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card;   // abstract
 

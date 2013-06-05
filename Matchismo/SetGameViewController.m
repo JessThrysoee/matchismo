@@ -13,18 +13,23 @@
 
 @interface SetGameViewController ()
 @property (readonly, nonatomic) NSUInteger matchCount;
-@property (strong, nonatomic) Deck *deck;
 @end
 
 @implementation SetGameViewController
+@synthesize deck = _deck;
 
-#define MATCH_COUNT 3
+#define MATCH_COUNT      3
 #define START_CARD_COUNT 12
 
 
-- (Deck *)createDeck
+- (Deck *)deck
 {
-    return [[SetCardDeck alloc] init];
+    if (!_deck)
+    {
+        _deck = [[SetCardDeck alloc] init];
+    }
+    
+    return _deck;
 }
 
 
@@ -33,29 +38,31 @@
     return START_CARD_COUNT;
 }
 
--(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {
     if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
     {
         SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
-        if ([card isKindOfClass: [SetCard class]]) {
-            SetCard *setCard = (SetCard*)card;
+        
+        if ([card isKindOfClass:[SetCard class]])
+        {
+            SetCard *setCard = (SetCard *)card;
             cardView.number = setCard.number;
             cardView.symbol = setCard.symbol;
-            cardView.color = setCard.color ;
+            cardView.color = setCard.color;
             cardView.shading = setCard.shading;
             
             cardView.faceUp = setCard.isFaceup;
-            //cardView.alpha = setCard.isUnplayable ? 0.3 : 1.0;
         }
     }
 }
+
 
 - (NSUInteger)matchCount
 {
     return MATCH_COUNT;
 }
-
 
 
 @end

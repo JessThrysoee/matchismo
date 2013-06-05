@@ -21,6 +21,10 @@
              flipResult:(FlipResult *)flipResult;
 
 - (void)flipCardAtIndex:(NSUInteger)index;
+
 - (Card *)cardAtIndex:(NSUInteger)index;
+@property (nonatomic, readonly)NSUInteger cardCount;
+
+-(void)addCardFromDeck:(Deck*)deck;
 
 @end

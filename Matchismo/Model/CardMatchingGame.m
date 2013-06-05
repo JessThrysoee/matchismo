@@ -66,6 +66,12 @@
 }
 
 
+- (void)addCardFromDeck:(Deck *)deck
+{
+    [self.cards addObject:[deck drawRandomCard]];
+}
+
+
 - (void)flipCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
@@ -130,6 +136,11 @@
 - (Card *)cardAtIndex:(NSUInteger)index
 {
     return index < [self.cards count] ? self.cards[index] : nil;
+}
+
+-(NSUInteger)cardCount
+{
+    return [self.cards count];
 }
 
 

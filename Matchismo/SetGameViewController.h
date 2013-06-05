@@ -9,5 +9,5 @@
 #import "CardGameViewController.h"
 
 @interface SetGameViewController : CardGameViewController
-
+@property (strong, nonatomic) Deck *deck;
 @end

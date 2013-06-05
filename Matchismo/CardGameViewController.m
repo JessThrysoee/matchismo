@@ -43,8 +43,8 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    // TODO
-    return self.startingCardCount; // return [myDataModel count];
+    NSLog(@"Section index %d, cardCount %d", section, self.game.cardCount);
+    return self.game.cardCount;
 }
 
 
@@ -56,13 +56,6 @@
     [self updateCell:cell usingCard:card];
     
     return cell;
-}
-
-
-- (Deck *)createDeck
-{
-    // abstract
-    return nil;
 }
 
 
@@ -84,7 +77,7 @@
     {
         _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount
                                                  matchCount:self.matchCount
-                                                  usingDeck:[self createDeck]
+                                                  usingDeck:self.deck
                                                  flipResult:self.flipResult];
     }
     
@@ -141,6 +134,42 @@
     self.game = nil;
     self.flipResult = nil;
     [self updateUI];
+}
+
+
+#define DRAW_NUMBER_OF_CARDS 7
+
+- (IBAction)drawCards
+{
+    [self.cardCollectionView
+     performBatchUpdates:^{
+         int cardCount = self.game.cardCount;
+         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+         
+         for (int i = cardCount; i < cardCount + DRAW_NUMBER_OF_CARDS; i++)
+         {
+             [self.game
+              addCardFromDeck:self.deck];
+             [indexPaths addObject:[NSIndexPath indexPathForItem:i
+                                                       inSection:0]];
+         }
+         
+         [self.cardCollectionView
+          insertItemsAtIndexPaths:indexPaths];
+     }
+     
+     
+     completion:^(BOOL finished) {
+         if (self.game.cardCount > 0)
+         {
+             NSIndexPath *lastItem = [NSIndexPath indexPathForItem:self.game.cardCount - 1
+                                                         inSection:0];
+             [self.cardCollectionView
+              scrollToItemAtIndexPath:lastItem
+              atScrollPosition:UICollectionViewScrollPositionTop
+              animated:YES];
+         }
+     }];
 }
 
 
