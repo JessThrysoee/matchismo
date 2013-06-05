@@ -45,11 +45,13 @@
 {
 }
 
+
 - (void)setFaceUp:(BOOL)faceUp
 {
     _faceUp = faceUp;
     [self setNeedsDisplay];
 }
+
 
 - (void)layoutSubviews
 {
@@ -147,20 +149,14 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    
-    UIBezierPath *border = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:12];
-    [[UIColor colorWithRed:0.99 green:0.99 blue:0.96 alpha:1] setFill];
-    [border fill];
-    [border addClip];
-    
-    [[UIColor clearColor] setFill];
-    
-    [self.uicolor setStroke];
-    [[UIColor clearColor] setFill];
+    [self cardClip];
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 5;
     path.lineJoinStyle = kCGLineJoinRound;
+    
+    [self.uicolor setStroke];
+    [[UIColor clearColor] setFill];
     
     [self symbolPath:path];
     [path stroke];
@@ -169,9 +165,8 @@
     [self shadePath:path];
     [path stroke];
     
-    // TODO
-//    if (self.faceUp) {
-
+    
+    self.alpha = self.faceUp ? 0.5 : 1.0;
 }
 
 
@@ -301,6 +296,18 @@
 }
 
 
+- (void)cardClip
+{
+    UIBezierPath *border = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:12];
+    
+    [[UIColor colorWithRed:0.99 green:0.99 blue:0.96 alpha:1] setFill];
+    [border fill];
+    [border addClip];
+    
+    [[UIColor clearColor] setFill];
+}
+
+
 CGPoint prevPoint(CGPoint p, CGFloat slope, CGFloat length)
 {
     CGFloat sign = (0 < slope) - (slope < 0);
@@ -324,19 +331,3 @@ CGPoint nextPoint(CGPoint p, CGFloat slope, CGFloat length)
 
 
 @end
-
-//- (void)drawSquiggleAtPoint:(CGPoint)point;
-//{
-//    CGContextRef ctxt = UIGraphicsGetCurrentContext();
-//    CGContextSaveGState(ctxt);
-//
-//    CGContextTranslateCTM(ctxt, point.x, point.y);
-//
-//    path.lineWidth = 5;
-//
-//    [path fill];
-//    [path stroke];
-//
-//
-//    CGContextRestoreGState(ctxt);
-//}
