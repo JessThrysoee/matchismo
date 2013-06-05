@@ -143,5 +143,9 @@
     return [self.cards count];
 }
 
+-(void) removeCardAtIndex:(NSUInteger)index
+{
+    [self.cards removeObjectAtIndex:index];
+}
 
 @end

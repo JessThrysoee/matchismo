@@ -23,6 +23,8 @@
 - (void)flipCardAtIndex:(NSUInteger)index;
 
 - (Card *)cardAtIndex:(NSUInteger)index;
+-(void) removeCardAtIndex:(NSUInteger)index;
+
 @property (nonatomic, readonly)NSUInteger cardCount;
 
 -(void)addCardFromDeck:(Deck*)deck;
