@@ -27,6 +27,6 @@
 
 @property (nonatomic, readonly)NSUInteger cardCount;
 
--(void)addCardFromDeck:(Deck*)deck;
+- (void)addCard:(Card *)card;
 
 @end

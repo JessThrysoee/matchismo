@@ -15,5 +15,6 @@
 @property (strong, nonatomic) Deck* deck;
 @property (nonatomic) NSUInteger startingCardCount;   // abstract
 -(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card;   // abstract
+-(void)updateCardView:(UIView*)view usingCard:(Card*)card;  //abstract
 
 @end

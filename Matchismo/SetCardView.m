@@ -8,6 +8,8 @@
 
 #import "SetCardView.h"
 
+#define SMALL_LIMIT 50
+
 @interface SetCardView ()
 @property (nonatomic) UIColor *uicolor;
 
@@ -62,7 +64,7 @@
 
 - (BOOL)valid:(NSUInteger)val
 {
-    return val == 1 || val == 2 || val == 3;
+    return val == 0 || val == 1 || val == 2 || val == 3;
 }
 
 
@@ -107,6 +109,10 @@
         
         switch (color)
         {
+            case 0:
+                // empty card
+                break;
+                
             case 1:
                 // purple
                 self.uicolor = [UIColor colorWithRed:0.6 green:0 blue:0.8 alpha:1];
@@ -151,8 +157,20 @@
 {
     [self cardClip];
     
+    if (self.symbol == 0)
+    {
+        return;
+    }
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
+    
     path.lineWidth = 5;
+    
+    if (self.cardH < SMALL_LIMIT)
+    {
+        path.lineWidth = 2;
+    }
+    
     path.lineJoinStyle = kCGLineJoinRound;
     
     [self.uicolor setStroke];
@@ -165,8 +183,14 @@
     [self shadePath:path];
     [path stroke];
     
-    
-    self.alpha = self.faceUp ? 0.5 : 1.0;
+    if (self.cardH < SMALL_LIMIT)
+    {
+        self.alpha = 1;
+    }
+    else
+    {
+        self.alpha = self.faceUp ? 0.5 : 1.0;
+    }
 }
 
 
@@ -187,7 +211,7 @@
             break;
             
         default:
-            assert(NULL);
+            //assert(NULL);
             break;
     }
 }
@@ -210,7 +234,7 @@
             break;
             
         default:
-            assert(NULL);
+            //assert(NULL);
             break;
     }
 }
@@ -281,6 +305,12 @@
     path.lineWidth = 1;
     
     CGFloat countLines = 20;
+    
+    if (self.cardH < SMALL_LIMIT)
+    {
+        countLines = 10;
+    }
+    
     CGFloat lineHeight = cardH / countLines;
     
     for (int i = 0; i < countLines; i++)
@@ -298,13 +328,20 @@
 
 - (void)cardClip
 {
-    UIBezierPath *border = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:12];
+    NSUInteger cornerRadius = 12;
+    
+    UIBezierPath *border = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:cornerRadius];
     
     [[UIColor colorWithRed:0.99 green:0.99 blue:0.96 alpha:1] setFill];
     [border fill];
-    [border addClip];
     
-    [[UIColor clearColor] setFill];
+    if (self.cardH < SMALL_LIMIT)
+    {
+        [[UIColor colorWithRed:0.52 green:0.52 blue:0.52 alpha:1] setStroke];
+        [border stroke];
+    }
+    
+    [border addClip];
 }
 
 

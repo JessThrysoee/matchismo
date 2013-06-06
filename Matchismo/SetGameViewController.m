@@ -38,12 +38,11 @@
     return START_CARD_COUNT;
 }
 
-
-- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+-(void)updateCardView:(UIView*)view usingCard:(Card*)card
 {
-    if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
+    if ([view isKindOfClass:[SetCardView class]])
     {
-        SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
+        SetCardView *cardView = (SetCardView*)view;
         
         if ([card isKindOfClass:[SetCard class]])
         {
@@ -54,7 +53,23 @@
             cardView.shading = setCard.shading;
             
             cardView.faceUp = setCard.isFaceup;
+        } else {
+            cardView.number = 0;
+            cardView.symbol = 0;
+            cardView.color = 0;
+            cardView.shading = 0;
+            cardView.faceUp = NO;
         }
+    }
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
+{
+    if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
+    {
+        SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
+        
+        [self updateCardView:cardView usingCard:card];
     }
 }
 

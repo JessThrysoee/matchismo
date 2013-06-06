@@ -17,21 +17,15 @@
 @interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UIButton *drawButton;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) FlipResult *flipResult;
 @property (readonly, nonatomic) NSUInteger matchCount;
+@property (strong, nonatomic) NSMutableArray *selectedCards;
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @end
 
 @implementation CardGameViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    //[self cardCollectionView].collectionViewLayout.section
-}
-
 
 #define MARGIN 20
 
@@ -62,6 +56,12 @@
 - (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {
     // abstract
+}
+
+
+- (void)updateCardView:(UIView *)view usingCard:(Card *)card
+{
+    //abstract
 }
 
 
@@ -96,6 +96,17 @@
 }
 
 
+- (NSMutableArray *)selectedCards
+{
+    if (!_selectedCards)
+    {
+        _selectedCards = [[NSMutableArray alloc] init];
+    }
+    
+    return _selectedCards;
+}
+
+
 - (IBAction)flipCard:(UITapGestureRecognizer *)gesture
 {
     CGPoint tapLocation = [gesture locationInView:self.cardCollectionView];
@@ -104,6 +115,31 @@
     if (indexPath)
     {
         [self.game flipCardAtIndex:indexPath.item];
+        
+        for (int i = 0; i < [self.game cardCount]; i++)
+        {
+        }
+        
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        
+        if (card.isUnplayable)
+        {
+            [self.selectedCards removeAllObjects];
+        }
+        else if ([self.selectedCards count] - 1 == self.matchCount && card.isFaceup)
+        {
+            [self.selectedCards removeAllObjects];
+        }
+        
+        if (card.isFaceup)
+        {
+            [self.selectedCards addObject:card];
+        }
+        else
+        {
+            [self.selectedCards removeObject:card];
+        }
+        
         [self updateUI];
     }
 }
@@ -111,17 +147,32 @@
 
 - (void)updateUI
 {
-    for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells])
+    for (UICollectionViewCell *cell in[self.cardCollectionView visibleCells])
     {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         Card *card = [self.game cardAtIndex:indexPath.item];
         
-        if (card.isUnplayable) {
+        if (card.isUnplayable)
+        {
             // TODO only for set cards -- it should be in child class
             [self.game removeCardAtIndex:indexPath.item];
             [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-        } else {
+        }
+        else
+        {
             [self updateCell:cell usingCard:card];
+        }
+    }
+    
+    for (int i = 0; i < 3; i++)
+    {
+        if (i < [self.selectedCards count])
+        {
+            [self updateCardView:[self.view viewWithTag:i + 1] usingCard:[self.selectedCards objectAtIndex:i]];
+        }
+        else
+        {
+            [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
         }
     }
     
@@ -131,34 +182,73 @@
 }
 
 
-- (void)updateUIForButton:(UIButton *)button card:(Card *)card
+- (void)resetSelectedCardViews
 {
+    self.selectedCards = nil;
+    
+    for (int i = 0; i < 3; i++)
+    {
+        [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
+    }
 }
 
 
 - (void)reset
 {
+    self.deck = nil;
     self.game = nil;
     self.flipResult = nil;
+    self.drawButton.enabled = YES;
+    
+    [self resetSelectedCardViews];
+    
+    [self.cardCollectionView
+     performBatchUpdates: ^{
+         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+         
+         for (int i = self.startingCardCount; i < [self.cardCollectionView
+                                                   numberOfItemsInSection:0]; i++)
+         {
+             [indexPaths addObject:[NSIndexPath indexPathForItem:i
+                                                       inSection:0]];
+         }
+         
+         [self.cardCollectionView
+          deleteItemsAtIndexPaths:indexPaths];
+     }
+     
+     
+     completion:nil];
+    
     [self updateUI];
 }
 
 
 #define DRAW_NUMBER_OF_CARDS 7
 
-- (IBAction)drawCards
+- (IBAction)drawCards:(UIButton *)sender
 {
     [self.cardCollectionView
-     performBatchUpdates:^{
+     performBatchUpdates: ^{
          int cardCount = self.game.cardCount;
          NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
          
          for (int i = cardCount; i < cardCount + DRAW_NUMBER_OF_CARDS; i++)
          {
-             [self.game
-              addCardFromDeck:self.deck];
-             [indexPaths addObject:[NSIndexPath indexPathForItem:i
-                                                       inSection:0]];
+             Card *card = [self.deck drawRandomCard];
+             
+             if (card)
+             {
+                 [self.game
+                  addCard:card];
+                 [indexPaths addObject:[NSIndexPath indexPathForItem:i
+                                                           inSection:0]];
+             }
+             else
+             {
+                 self.drawButton.enabled = NO;
+                 self.drawButton.userInteractionEnabled = NO;
+             }
          }
          
          [self.cardCollectionView
@@ -166,7 +256,7 @@
      }
      
      
-     completion:^(BOOL finished) {
+     completion: ^(BOOL finished) {
          if (self.game.cardCount > 0)
          {
              NSIndexPath *lastItem = [NSIndexPath indexPathForItem:self.game.cardCount - 1
@@ -176,7 +266,10 @@
               atScrollPosition:UICollectionViewScrollPositionTop
               animated:YES];
          }
-     }];
+     }
+     
+     
+     ];
 }
 
 

@@ -66,9 +66,9 @@
 }
 
 
-- (void)addCardFromDeck:(Deck *)deck
+- (void)addCard:(Card *)card
 {
-    [self.cards addObject:[deck drawRandomCard]];
+    [self.cards addObject:card];
 }
 
 
