@@ -54,11 +54,7 @@
             
             cardView.faceUp = setCard.isFaceup;
         } else {
-            cardView.number = 0;
-            cardView.symbol = 0;
-            cardView.color = 0;
-            cardView.shading = 0;
-            cardView.faceUp = NO;
+            [cardView blankCard];
         }
     }
 }

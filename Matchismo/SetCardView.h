@@ -18,4 +18,6 @@
 @property (nonatomic, readonly, getter=isThumb) BOOL thumb; // is this a thumbnail sized view
 @property (nonatomic) BOOL faceUp;
 
+-(void)blankCard;
+
 @end

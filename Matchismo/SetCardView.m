@@ -139,6 +139,15 @@
     [self update];
 }
 
+-(void)blankCard
+{
+    self.number = 0;
+    self.symbol = 0;
+    self.color = 0;
+    self.shading = 0;
+    self.faceUp = NO;
+
+}
 
 - (void)update
 {
