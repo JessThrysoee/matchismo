@@ -97,19 +97,19 @@
                                     <action selector="drawCards:" destination="HRa-F7-jfb" eventType="touchUpInside" id="0NJ-XG-Kfv"/>
                                 </connections>
                             </button>
-                            <view tag="1" contentMode="scaleToFill" horizontalHuggingPriority="563" translatesAutoresizingMaskIntoConstraints="NO" id="YmL-CE-A9c" customClass="SetCardView">
+                            <view tag="1" contentMode="scaleToFill" horizontalHuggingPriority="563" translatesAutoresizingMaskIntoConstraints="NO" id="YmL-CE-A9c" customClass="SetCardThumbView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" type="user" id="IiO-Qy-rks"/>
                                 </constraints>
                             </view>
-                            <view tag="2" contentMode="scaleToFill" horizontalHuggingPriority="587" translatesAutoresizingMaskIntoConstraints="NO" id="nId-K9-cEh" customClass="SetCardView">
+                            <view tag="2" contentMode="scaleToFill" horizontalHuggingPriority="587" translatesAutoresizingMaskIntoConstraints="NO" id="nId-K9-cEh" customClass="SetCardThumbView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" type="user" id="SoO-s4-FFL"/>
                                 </constraints>
                             </view>
-                            <view tag="3" contentMode="scaleToFill" horizontalHuggingPriority="661" translatesAutoresizingMaskIntoConstraints="NO" id="m19-gz-gre" customClass="SetCardView">
+                            <view tag="3" contentMode="scaleToFill" horizontalHuggingPriority="661" translatesAutoresizingMaskIntoConstraints="NO" id="m19-gz-gre" customClass="SetCardThumbView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" type="user" id="Z6V-cH-8yd"/>
@@ -310,7 +310,6 @@
                 <relationship kind="outlet" name="drawButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="selectedCardViews" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="MatchGameViewController" superclassName="CardGameViewController">
@@ -333,6 +332,9 @@
             <relationships>
                 <relationship kind="outlet" name="cardView" candidateClass="SetCardView"/>
             </relationships>
+        </class>
+        <class className="SetCardThumbView" superclassName="SetCardView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardThumbView.h"/>
         </class>
         <class className="SetCardView" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardView.h"/>

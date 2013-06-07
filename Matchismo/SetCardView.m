@@ -8,8 +8,6 @@
 
 #import "SetCardView.h"
 
-#define SMALL_LIMIT 50
-
 @interface SetCardView ()
 @property (nonatomic) UIColor *uicolor;
 
@@ -61,6 +59,10 @@
     [self update];
 }
 
+-(BOOL)isThumb
+{
+    return NO;
+}
 
 - (BOOL)valid:(NSUInteger)val
 {
@@ -166,7 +168,7 @@
     
     path.lineWidth = 5;
     
-    if (self.cardH < SMALL_LIMIT)
+    if (self.isThumb)
     {
         path.lineWidth = 2;
     }
@@ -183,7 +185,7 @@
     [self shadePath:path];
     [path stroke];
     
-    if (self.cardH < SMALL_LIMIT)
+    if (self.isThumb)
     {
         self.alpha = 1;
     }
@@ -306,7 +308,7 @@
     
     CGFloat countLines = 20;
     
-    if (self.cardH < SMALL_LIMIT)
+    if (self.isThumb)
     {
         countLines = 10;
     }
@@ -335,7 +337,7 @@
     [[UIColor colorWithRed:0.99 green:0.99 blue:0.96 alpha:1] setFill];
     [border fill];
     
-    if (self.cardH < SMALL_LIMIT)
+    if (self.isThumb)
     {
         [[UIColor colorWithRed:0.52 green:0.52 blue:0.52 alpha:1] setStroke];
         [border stroke];
