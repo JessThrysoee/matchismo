@@ -30,7 +30,7 @@
     {
         _cards = [[NSMutableArray alloc] init];
     }
-    
+
     return _cards;
 }
 
@@ -41,13 +41,13 @@
              flipResult:(id <FlipResultProtocol>)flipResult
 {
     self = [super init];
-    
+
     if (self)
     {
         for (int i = 0; i < count; i++)
         {
             Card *card = [deck drawRandomCard];
-            
+
             if (!card)
             {
                 self = nil;
@@ -57,11 +57,11 @@
                 self.cards[i] = card;
             }
         }
-        
+
         self.matchCount = matchCount;
         self.flipResult = flipResult;
     }
-    
+
     return self;
 }
 
@@ -77,7 +77,7 @@
     Card *card = [self cardAtIndex:index];
     NSUInteger score = 0;
     NSMutableArray *otherCards = [[NSMutableArray alloc] init];
-    
+
     if (!card.isUnplayable)
     {
         if (!card.isFaceup)
@@ -89,18 +89,18 @@
                     [otherCards addObject:otherCard];
                 }
             }
-            
+
             if (otherCards.count == self.matchCount - 1)
             {
                 int matchScore = [card match:otherCards];
-                
+
                 if (matchScore)
                 {
                     for (Card *otherCard in otherCards)
                     {
                         otherCard.unplayable = YES;
                     }
-                    
+
                     card.unplayable = YES;
                     score = matchScore;
                     self.score += score;
@@ -112,22 +112,22 @@
                     {
                         otherCard.faceUp = NO;
                     }
-                    
+
                     score = MISMATCH_PENALTY;
                     self.score += score;
                     [self.flipResult addMismatchForCard:card andCards:otherCards withScore:score];
                 }
             }
-            
+
             if (!score)
             {
                 // no match or mismatch
                 [self.flipResult addFlipForCard:card];
             }
-            
+
             self.score += FLIP_COST;
         }
-        
+
         card.faceUp = !card.isFaceup;
     }
 }
@@ -138,14 +138,17 @@
     return index < [self.cards count] ? self.cards[index] : nil;
 }
 
--(NSUInteger)cardCount
+
+- (NSUInteger)cardCount
 {
     return [self.cards count];
 }
 
--(void) removeCardAtIndex:(NSUInteger)index
+
+- (void)removeCardAtIndex:(NSUInteger)index
 {
     [self.cards removeObjectAtIndex:index];
 }
+
 
 @end

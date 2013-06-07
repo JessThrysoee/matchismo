@@ -17,7 +17,7 @@
 
 @implementation MatchGameViewController
 
-#define MATCH_COUNT 2
+#define MATCH_COUNT      2
 #define START_CARD_COUNT 22
 
 - (NSUInteger)matchCount
@@ -25,23 +25,28 @@
     return MATCH_COUNT;
 }
 
+
 - (Deck *)createDeck
 {
     return [[PlayingCardDeck alloc] init];
 }
+
 
 - (NSUInteger)startingCardCount
 {
     return START_CARD_COUNT;
 }
 
--(void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {
     if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]])
     {
         PlayingCardView *cardView = ((PlayingCardCollectionViewCell *)cell).cardView;
-        if ([card isKindOfClass: [PlayingCard class]]) {
-            PlayingCard *playingCard = (PlayingCard*)card;
+
+        if ([card isKindOfClass:[PlayingCard class]])
+        {
+            PlayingCard *playingCard = (PlayingCard *)card;
             cardView.suit = playingCard.suit;
             cardView.rank = playingCard.rank;
             cardView.faceUp = playingCard.isFaceup;

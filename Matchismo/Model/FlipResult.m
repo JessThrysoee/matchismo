@@ -18,12 +18,12 @@
 - (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer
 {
     self = [super init];
-    
+
     if (self)
     {
         _renderer = renderer;
     }
-    
+
     return self;
 }
 
@@ -34,7 +34,7 @@
     {
         _results = [[NSMutableArray alloc] init];
     }
-    
+
     return _results;
 }
 
@@ -42,7 +42,7 @@
 - (void)appendString:(NSString *)str to:(NSMutableAttributedString *)attrStr
 {
     NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:str];
-    
+
     [attrStr appendAttributedString:tmp];
 }
 
@@ -50,19 +50,19 @@
 - (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
 {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-    
+
     [self appendString:@"Matched " to:result];
-    
+
     [result appendAttributedString:[self.renderer renderCard:card]];
-    
+
     for (Card *otherCard in otherCards)
     {
         [self appendString:@" & " to:result];
         [result appendAttributedString:[self.renderer renderCard:otherCard]];
     }
-    
+
     [self appendString:[NSString stringWithFormat:@" for %d points", score] to:result];
-    
+
     [self.results addObject:result];
 }
 
@@ -70,17 +70,17 @@
 - (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
 {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-    
+
     [result appendAttributedString:[self.renderer renderCard:card]];
-    
+
     for (Card *otherCard in otherCards)
     {
         [self appendString:@" & " to:result];
         [result appendAttributedString:[self.renderer renderCard:otherCard]];
     }
-    
+
     [self appendString:[NSString stringWithFormat:@" don't match! %d point penalty", score] to:result];
-    
+
     [self.results addObject:result];
 }
 
@@ -88,11 +88,11 @@
 - (void)addFlipForCard:(Card *)card
 {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-    
+
     [self appendString:@"Flipped up " to:result];
-    
+
     [result appendAttributedString:[self.renderer renderCard:card]];
-    
+
     [self.results addObject:result];
 }
 
@@ -112,12 +112,12 @@
 - (NSAttributedString *)resultAtIndex:(NSUInteger)index
 {
     NSAttributedString *result;
-    
+
     if (index < self.results.count)
     {
         result = [self.results objectAtIndex:index];
     }
-    
+
     return result;
 }
 

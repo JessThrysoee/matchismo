@@ -14,7 +14,7 @@
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         for (NSUInteger number = 1; number <= 3; number++)
@@ -30,14 +30,14 @@
                         card.symbol = symbol;
                         card.shading = shading;
                         card.color = color;
-                        
+
                         [self addCard:card atTop:YES];
                     }
                 }
             }
         }
     }
-    
+
     return self;
 }
 

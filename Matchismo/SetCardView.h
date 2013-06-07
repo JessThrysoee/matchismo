@@ -15,9 +15,9 @@
 @property (nonatomic) NSUInteger shading;
 @property (nonatomic) NSUInteger color;
 
-@property (nonatomic, readonly, getter=isThumb) BOOL thumb; // is this a thumbnail sized view
+@property (nonatomic, readonly, getter = isThumb) BOOL thumb; // is this a thumbnail sized view
 @property (nonatomic) BOOL faceUp;
 
--(void)blankCard;
+- (void)blankCard;
 
 @end

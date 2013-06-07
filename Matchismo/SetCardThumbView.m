@@ -10,9 +10,10 @@
 
 @implementation SetCardThumbView
 
--(BOOL)isThumb
+- (BOOL)isThumb
 {
     return YES;
 }
+
 
 @end

@@ -15,11 +15,11 @@
 - (BOOL)matchFeature:(NSString *)feature cards:(NSArray *)cards
 {
     NSUInteger myVal, val0, val1;
-    
+
     myVal = [[self valueForKey:feature] unsignedIntegerValue];
     val0 = [[cards[0] valueForKey:feature] unsignedIntegerValue];
     val1 = [[cards[1] valueForKey:feature] unsignedIntegerValue];
-    
+
     if (val0 == val1)
     {
         // if two values are equal then the so must the third
@@ -36,7 +36,7 @@
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
-    
+
     if (otherCards.count == 2)
     {
         if ([self matchFeature:@"number" cards:otherCards] &&
@@ -47,7 +47,7 @@
             score = 10;
         }
     }
-    
+
     return score;
 }
 

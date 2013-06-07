@@ -15,11 +15,11 @@
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
-    
+
     if (otherCards.count == 1)
     {
         PlayingCard *secondCard = [otherCards lastObject];
-        
+
         if ([secondCard.suit isEqualToString:self.suit])
         {
             // suit-suit ~ 24%
@@ -31,12 +31,12 @@
             score = 16;
         }
     }
-    
+
     if (otherCards.count == 2)
     {
         PlayingCard *secondCard = [otherCards objectAtIndex:0];
         PlayingCard *thirdCard = [otherCards objectAtIndex:1];
-        
+
         if (secondCard.rank == self.rank && thirdCard.rank == self.rank)
         {
             // rank-rank-rank ~ 0.2 %
@@ -58,7 +58,7 @@
             score = 1;
         }
     }
-    
+
     return score;
 }
 
@@ -72,12 +72,12 @@
 + (NSArray *)validSuits
 {
     static NSArray *validSuits = nil;
-    
+
     if (!validSuits)
     {
         validSuits = @[@"♥", @"♦", @"♠", @"♣"];
     }
-    
+
     return validSuits;
 }
 

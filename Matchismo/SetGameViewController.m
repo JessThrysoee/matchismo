@@ -28,7 +28,7 @@
     {
         _deck = [[SetCardDeck alloc] init];
     }
-    
+
     return _deck;
 }
 
@@ -38,12 +38,13 @@
     return START_CARD_COUNT;
 }
 
--(void)updateCardView:(UIView*)view usingCard:(Card*)card
+
+- (void)updateCardView:(UIView *)view usingCard:(Card *)card
 {
     if ([view isKindOfClass:[SetCardView class]])
     {
-        SetCardView *cardView = (SetCardView*)view;
-        
+        SetCardView *cardView = (SetCardView *)view;
+
         if ([card isKindOfClass:[SetCard class]])
         {
             SetCard *setCard = (SetCard *)card;
@@ -51,20 +52,23 @@
             cardView.symbol = setCard.symbol;
             cardView.color = setCard.color;
             cardView.shading = setCard.shading;
-            
+
             cardView.faceUp = setCard.isFaceup;
-        } else {
+        }
+        else
+        {
             [cardView blankCard];
         }
     }
 }
+
 
 - (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {
     if ([cell isKindOfClass:[SetCardCollectionViewCell class]])
     {
         SetCardView *cardView = ((SetCardCollectionViewCell *)cell).cardView;
-        
+
         [self updateCardView:cardView usingCard:card];
     }
 }

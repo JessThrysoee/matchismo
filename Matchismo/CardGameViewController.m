@@ -46,9 +46,9 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Card" forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
-    
+
     [self updateCell:cell usingCard:card];
-    
+
     return cell;
 }
 
@@ -80,7 +80,7 @@
                                                   usingDeck:self.deck
                                                  flipResult:self.flipResult];
     }
-    
+
     return _game;
 }
 
@@ -91,7 +91,7 @@
     {
         _flipResult = [[FlipResult alloc] initWithCardRenderer:self];
     }
-    
+
     return _flipResult;
 }
 
@@ -102,7 +102,7 @@
     {
         _selectedCards = [[NSMutableArray alloc] init];
     }
-    
+
     return _selectedCards;
 }
 
@@ -111,17 +111,17 @@
 {
     CGPoint tapLocation = [gesture locationInView:self.cardCollectionView];
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
-    
+
     if (indexPath)
     {
         [self.game flipCardAtIndex:indexPath.item];
-        
+
         for (int i = 0; i < [self.game cardCount]; i++)
         {
         }
-        
+
         Card *card = [self.game cardAtIndex:indexPath.item];
-        
+
         if (card.isUnplayable)
         {
             [self.selectedCards removeAllObjects];
@@ -130,7 +130,7 @@
         {
             [self.selectedCards removeAllObjects];
         }
-        
+
         if (card.isFaceup)
         {
             [self.selectedCards addObject:card];
@@ -139,7 +139,7 @@
         {
             [self.selectedCards removeObject:card];
         }
-        
+
         [self updateUI];
     }
 }
@@ -151,7 +151,7 @@
     {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         Card *card = [self.game cardAtIndex:indexPath.item];
-        
+
         if (card.isUnplayable)
         {
             // TODO only for set cards -- it should be in child class
@@ -163,7 +163,7 @@
             [self updateCell:cell usingCard:card];
         }
     }
-    
+
     for (int i = 0; i < 3; i++)
     {
         if (i < [self.selectedCards count])
@@ -175,7 +175,7 @@
             [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
         }
     }
-    
+
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.resultLabel.attributedText = self.flipResult.lastResult;
     self.resultLabel.textAlignment = NSTextAlignmentCenter;
@@ -185,7 +185,7 @@
 - (void)resetSelectedCardViews
 {
     self.selectedCards = nil;
-    
+
     for (int i = 0; i < 3; i++)
     {
         [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
@@ -199,27 +199,27 @@
     self.game = nil;
     self.flipResult = nil;
     self.drawButton.enabled = YES;
-    
+
     [self resetSelectedCardViews];
-    
+
     [self.cardCollectionView
      performBatchUpdates: ^{
          NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-         
+
          for (int i = self.startingCardCount; i < [self.cardCollectionView
-                                                   numberOfItemsInSection:0]; i++)
+                                                  numberOfItemsInSection:0]; i++)
          {
-             [indexPaths addObject:[NSIndexPath indexPathForItem:i
-                                                       inSection:0]];
+            [indexPaths addObject:[NSIndexPath indexPathForItem:i
+                                                      inSection:0]];
          }
-         
+
          [self.cardCollectionView
           deleteItemsAtIndexPaths:indexPaths];
      }
-     
-     
-     completion:nil];
-    
+
+
+              completion:nil];
+
     [self updateUI];
 }
 
@@ -232,44 +232,44 @@
      performBatchUpdates: ^{
          int cardCount = self.game.cardCount;
          NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-         
+
          for (int i = cardCount; i < cardCount + DRAW_NUMBER_OF_CARDS; i++)
          {
-             Card *card = [self.deck drawRandomCard];
-             
-             if (card)
-             {
-                 [self.game
-                  addCard:card];
-                 [indexPaths addObject:[NSIndexPath indexPathForItem:i
-                                                           inSection:0]];
-             }
-             else
-             {
-                 self.drawButton.enabled = NO;
-                 self.drawButton.userInteractionEnabled = NO;
-             }
+            Card *card = [self.deck drawRandomCard];
+
+            if (card)
+            {
+                [self.game
+                 addCard:card];
+                [indexPaths addObject:[NSIndexPath indexPathForItem:i
+                                                          inSection:0]];
+            }
+            else
+            {
+                self.drawButton.enabled = NO;
+                self.drawButton.userInteractionEnabled = NO;
+            }
          }
-         
+
          [self.cardCollectionView
           insertItemsAtIndexPaths:indexPaths];
      }
-     
-     
-     completion: ^(BOOL finished) {
-         if (self.game.cardCount > 0)
-         {
-             NSIndexPath *lastItem = [NSIndexPath indexPathForItem:self.game.cardCount - 1
-                                                         inSection:0];
-             [self.cardCollectionView
-              scrollToItemAtIndexPath:lastItem
-              atScrollPosition:UICollectionViewScrollPositionTop
-              animated:YES];
-         }
-     }
-     
-     
-     ];
+
+
+              completion: ^(BOOL finished) {
+                  if (self.game.cardCount > 0)
+                  {
+                  NSIndexPath *lastItem = [NSIndexPath indexPathForItem:self.game.cardCount - 1
+                                                        inSection:0];
+                  [self.cardCollectionView
+                   scrollToItemAtIndexPath:lastItem
+                          atScrollPosition:UICollectionViewScrollPositionTop
+                                  animated:YES];
+                  }
+              }
+
+
+    ];
 }
 
 
