@@ -27,6 +27,7 @@
     return MATCH_COUNT;
 }
 
+
 - (Deck *)deck
 {
     if (!_deck)
@@ -36,6 +37,7 @@
 
     return _deck;
 }
+
 
 - (FlipResult *)flipResult
 {
@@ -53,10 +55,12 @@
     return START_CARD_COUNT;
 }
 
+
 - (BOOL)removeUnplayable
 {
     return NO;
 }
+
 
 - (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {

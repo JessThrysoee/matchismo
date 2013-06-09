@@ -33,6 +33,7 @@
     return _deck;
 }
 
+
 - (FlipResult *)flipResult
 {
     if (!_flipResult)
@@ -49,10 +50,12 @@
     return START_CARD_COUNT;
 }
 
+
 - (BOOL)removeUnplayable
 {
     return YES;
 }
+
 
 - (void)updateUI
 {
@@ -61,7 +64,7 @@
 }
 
 
--(void)updateThumbCardViews
+- (void)updateThumbCardViews
 {
     for (int i = 0; i < 3; i++)
     {
@@ -74,7 +77,6 @@
             [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
         }
     }
-    
 }
 
 

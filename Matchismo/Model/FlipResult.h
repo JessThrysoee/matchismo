@@ -17,6 +17,6 @@
 - (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer;
 
 @property (readonly, nonatomic) NSAttributedString *lastResult;
-@property (readonly, nonatomic) NSArray* cards;
+@property (readonly, nonatomic) NSArray *cards;
 
 @end
