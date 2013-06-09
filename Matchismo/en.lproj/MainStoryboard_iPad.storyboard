@@ -13,9 +13,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="145" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEu-gE-I8K">
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="82" constant="304" type="user" id="oAZ-6N-sHk"/>
-                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="ooAAoo">
                                         <attributes>
@@ -119,30 +116,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="YmL-CE-A9c" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="1Zv-1G-tHD"/>
-                            <constraint firstItem="eyJ-YP-WZy" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="4PM-zi-XSB"/>
+                            <constraint firstItem="YmL-CE-A9c" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="1Zv-1G-tHD"/>
                             <constraint firstItem="eyJ-YP-WZy" firstAttribute="leading" secondItem="aEu-gE-I8K" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="7Tg-Gn-Nwc"/>
                             <constraint firstItem="Bp0-kc-MSC" firstAttribute="baseline" secondItem="aEu-gE-I8K" secondAttribute="baseline" type="user" id="Ase-ys-sL7"/>
+                            <constraint firstItem="nId-K9-cEh" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="B8K-h1-75y"/>
                             <constraint firstItem="eAp-Xx-0c8" firstAttribute="leading" secondItem="Bp0-kc-MSC" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="EG3-w7-s7A"/>
+                            <constraint firstItem="m19-gz-gre" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FV9-TQ-ztm"/>
                             <constraint firstAttribute="trailing" secondItem="eAp-Xx-0c8" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="HK6-W6-tvm"/>
                             <constraint firstItem="aEu-gE-I8K" firstAttribute="leading" secondItem="m19-gz-gre" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="Hba-C6-jXR"/>
                             <constraint firstItem="nId-K9-cEh" firstAttribute="bottom" secondItem="YmL-CE-A9c" secondAttribute="bottom" type="default" id="INJ-QK-PQ0"/>
-                            <constraint firstItem="m19-gz-gre" firstAttribute="leading" secondItem="nId-K9-cEh" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="Mdt-zz-P9r"/>
                             <constraint firstItem="CaK-AH-l1Y" firstAttribute="trailing" secondItem="BVi-E6-rwV" secondAttribute="trailing" type="default" id="MiL-Fc-oID"/>
                             <constraint firstItem="YmL-CE-A9c" firstAttribute="leading" secondItem="BVi-E6-rwV" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="QIG-XN-4GX"/>
-                            <constraint firstItem="nId-K9-cEh" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="QXB-bN-bUq"/>
                             <constraint firstItem="Bp0-kc-MSC" firstAttribute="centerY" secondItem="eAp-Xx-0c8" secondAttribute="centerY" type="user" id="UDB-YC-g2M"/>
+                            <constraint firstItem="nId-K9-cEh" firstAttribute="leading" secondItem="YmL-CE-A9c" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="VHh-M6-mU9"/>
                             <constraint firstItem="m19-gz-gre" firstAttribute="leading" secondItem="BVi-E6-rwV" secondAttribute="leading" constant="166" type="user" id="Xzt-Sa-63E"/>
-                            <constraint firstItem="eyJ-YP-WZy" firstAttribute="baseline" secondItem="Bp0-kc-MSC" secondAttribute="baseline" type="default" id="cce-qd-fUW"/>
-                            <constraint firstItem="m19-gz-gre" firstAttribute="bottom" secondItem="eyJ-YP-WZy" secondAttribute="bottom" type="default" id="eWD-em-qx2"/>
+                            <constraint firstItem="eyJ-YP-WZy" firstAttribute="baseline" secondItem="Bp0-kc-MSC" secondAttribute="baseline" type="user" id="cce-qd-fUW"/>
+                            <constraint firstAttribute="bottom" secondItem="YmL-CE-A9c" secondAttribute="bottom" constant="8" id="cch-cW-opw"/>
                             <constraint firstItem="m19-gz-gre" firstAttribute="bottom" secondItem="nId-K9-cEh" secondAttribute="bottom" type="default" id="eZq-3U-knn"/>
                             <constraint firstItem="Bp0-kc-MSC" firstAttribute="leading" secondItem="eyJ-YP-WZy" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="eeA-wR-qYT"/>
                             <constraint firstAttribute="bottom" secondItem="eAp-Xx-0c8" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="fCf-4H-wmH"/>
-                            <constraint firstItem="nId-K9-cEh" firstAttribute="leading" secondItem="BVi-E6-rwV" secondAttribute="leading" constant="93" type="user" id="fxT-uc-L6b"/>
+                            <constraint firstItem="m19-gz-gre" firstAttribute="leading" secondItem="nId-K9-cEh" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="gBs-Uh-BlU"/>
                             <constraint firstItem="nId-K9-cEh" firstAttribute="leading" secondItem="YmL-CE-A9c" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="hNT-O9-owA"/>
+                            <constraint firstItem="Bp0-kc-MSC" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" type="user" id="lfq-3Q-37X"/>
                             <constraint firstItem="CaK-AH-l1Y" firstAttribute="leading" secondItem="BVi-E6-rwV" secondAttribute="leading" type="default" id="oZy-8B-VLZ"/>
                             <constraint firstItem="CaK-AH-l1Y" firstAttribute="top" secondItem="BVi-E6-rwV" secondAttribute="top" type="default" id="seU-L3-Bte"/>
-                            <constraint firstItem="m19-gz-gre" firstAttribute="top" secondItem="CaK-AH-l1Y" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zmR-4n-8fr"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="5tv-nG-SOl" appends="YES" id="7sp-TU-Oqg"/>
@@ -304,8 +301,6 @@
         <class className="CardGameViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
             <relationships>
-                <relationship kind="action" name="drawCards:" candidateClass="UIButton"/>
-                <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="drawButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
@@ -350,9 +345,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
