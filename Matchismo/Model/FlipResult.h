@@ -17,8 +17,6 @@
 - (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer;
 
 @property (readonly, nonatomic) NSAttributedString *lastResult;
-@property (readonly, nonatomic) NSUInteger count;
-
-- (NSString *)resultAtIndex:(NSUInteger)index;
+@property (readonly, nonatomic) NSArray* cards;
 
 @end

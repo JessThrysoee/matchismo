@@ -16,6 +16,8 @@
 @end
 
 @implementation MatchGameViewController
+@synthesize deck = _deck;
+@synthesize flipResult = _flipResult;
 
 #define MATCH_COUNT      2
 #define START_CARD_COUNT 22
@@ -25,10 +27,24 @@
     return MATCH_COUNT;
 }
 
-
-- (Deck *)createDeck
+- (Deck *)deck
 {
-    return [[PlayingCardDeck alloc] init];
+    if (!_deck)
+    {
+        _deck = [[PlayingCardDeck alloc] init];
+    }
+
+    return _deck;
+}
+
+- (FlipResult *)flipResult
+{
+    if (!_flipResult)
+    {
+        _flipResult = [[FlipResult alloc] initWithCardRenderer:self];
+    }
+
+    return _flipResult;
 }
 
 
@@ -37,6 +53,10 @@
     return START_CARD_COUNT;
 }
 
+- (BOOL)removeUnplayable
+{
+    return NO;
+}
 
 - (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card
 {

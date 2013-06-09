@@ -17,6 +17,7 @@
 
 @implementation SetGameViewController
 @synthesize deck = _deck;
+@synthesize flipResult = _flipResult;
 
 #define MATCH_COUNT      3
 #define START_CARD_COUNT 12
@@ -32,10 +33,48 @@
     return _deck;
 }
 
+- (FlipResult *)flipResult
+{
+    if (!_flipResult)
+    {
+        _flipResult = [[FlipResult alloc] initWithCardRenderer:nil];
+    }
+
+    return _flipResult;
+}
+
 
 - (NSUInteger)startingCardCount
 {
     return START_CARD_COUNT;
+}
+
+- (BOOL)removeUnplayable
+{
+    return YES;
+}
+
+- (void)updateUI
+{
+    [super updateUI];
+    [self updateThumbCardViews];
+}
+
+
+-(void)updateThumbCardViews
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (i < [self.flipResult.cards count])
+        {
+            [self updateCardView:[self.view viewWithTag:i + 1] usingCard:[self.flipResult.cards objectAtIndex:i]];
+        }
+        else
+        {
+            [self updateCardView:[self.view viewWithTag:i + 1] usingCard:nil];
+        }
+    }
+    
 }
 
 

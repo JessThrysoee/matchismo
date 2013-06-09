@@ -11,8 +11,8 @@
 
 @protocol FlipResultProtocol <NSObject>
 
-- (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score;
-- (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCard withScore:(NSUInteger)score;
-- (void)addFlipForCard:(Card *)card;
+- (void)addMatchForCards:(NSArray *)cards withScore:(NSInteger)score;
+- (void)addMismatchForCards:(NSArray *)cards withScore:(NSInteger)score;
+- (void)addFlipForCards:(NSArray *)cards;
 
 @end

@@ -18,137 +18,124 @@
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (weak, nonatomic) id <FlipResultProtocol> flipResult;
 @property (readonly, nonatomic) NSString *flipResultCount;
+@property (strong, nonatomic) NSMutableArray *faceUpCards;
 @property (nonatomic) NSUInteger matchCount;
 @end
 
 
 @implementation CardMatchingGame
 
-- (NSMutableArray *)cards
-{
-    if (!_cards)
-    {
+- (NSMutableArray *)cards {
+    if (!_cards) {
         _cards = [[NSMutableArray alloc] init];
     }
-
+    
     return _cards;
 }
 
+- (NSMutableArray *)faceUpCards {
+    if (!_faceUpCards) {
+        _faceUpCards = [[NSMutableArray alloc] init];
+    }
+    
+    return _faceUpCards;
+}
+
+- (void)updateFaceUpCards:(Card *)card {
+    // book keeping
+    if (card.isFaceup) {
+        [self.faceUpCards addObject:card];
+    } else {
+        [self.faceUpCards removeObject:card];
+    }
+}
 
 - (id)initWithCardCount:(NSUInteger)count
              matchCount:(NSUInteger)matchCount
               usingDeck:(Deck *)deck
-             flipResult:(id <FlipResultProtocol>)flipResult
-{
+             flipResult:(id <FlipResultProtocol>)flipResult {
     self = [super init];
-
-    if (self)
-    {
-        for (int i = 0; i < count; i++)
-        {
+    
+    if (self) {
+        for (int i = 0; i < count; i++) {
             Card *card = [deck drawRandomCard];
-
-            if (!card)
-            {
+            
+            if (!card) {
                 self = nil;
-            }
-            else
-            {
+            } else {
                 self.cards[i] = card;
             }
         }
-
+        
         self.matchCount = matchCount;
         self.flipResult = flipResult;
     }
-
+    
     return self;
 }
 
-
-- (void)addCard:(Card *)card
-{
+- (void)addCard:(Card *)card {
     [self.cards addObject:card];
 }
 
-
-- (void)flipCardAtIndex:(NSUInteger)index
-{
+- (void)flipCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
     NSUInteger score = 0;
-    NSMutableArray *otherCards = [[NSMutableArray alloc] init];
-
-    if (!card.isUnplayable)
-    {
-        if (!card.isFaceup)
-        {
-            for (Card *otherCard in self.cards)
-            {
-                if (otherCard.isFaceup && !otherCard.isUnplayable)
-                {
-                    [otherCards addObject:otherCard];
-                }
-            }
-
-            if (otherCards.count == self.matchCount - 1)
-            {
+    
+    if (!card.isUnplayable) {
+        card.faceUp = !card.isFaceup;
+        
+        NSArray *otherCards = [self.faceUpCards copy];
+        [self updateFaceUpCards:card];
+        
+        if (card.isFaceup) {
+            if ([otherCards count] == self.matchCount - 1) {
                 int matchScore = [card match:otherCards];
-
-                if (matchScore)
-                {
-                    for (Card *otherCard in otherCards)
-                    {
-                        otherCard.unplayable = YES;
+                
+                if (matchScore) {
+                    for (Card *faceUps in self.faceUpCards) {
+                        faceUps.unplayable = YES;
                     }
-
-                    card.unplayable = YES;
+                    
                     score = matchScore;
                     self.score += score;
-                    [self.flipResult addMatchForCard:card andCards:otherCards withScore:score];
-                }
-                else
-                {
-                    for (Card *otherCard in otherCards)
-                    {
-                        otherCard.faceUp = NO;
+                    
+                    [self.flipResult addMatchForCards:[self.faceUpCards copy] withScore:score];
+                } else {
+                    for (Card *faceUps in self.faceUpCards) {
+                        faceUps.faceUp = NO;
                     }
-
+                    
                     score = MISMATCH_PENALTY;
                     self.score += score;
-                    [self.flipResult addMismatchForCard:card andCards:otherCards withScore:score];
+                    
+                    [self.flipResult addMismatchForCards:[self.faceUpCards copy] withScore:score];
                 }
+                
+                [self.faceUpCards removeAllObjects];
             }
-
-            if (!score)
-            {
-                // no match or mismatch
-                [self.flipResult addFlipForCard:card];
-            }
-
+            
+            
             self.score += FLIP_COST;
         }
-
-        card.faceUp = !card.isFaceup;
+        
+        if (!score) {
+            // no match or mismatch
+            [self.flipResult addFlipForCards:[self.faceUpCards copy]];
+        }
     }
 }
 
-
-- (Card *)cardAtIndex:(NSUInteger)index
-{
+- (Card *)cardAtIndex:(NSUInteger)index {
     return index < [self.cards count] ? self.cards[index] : nil;
 }
 
-
-- (NSUInteger)cardCount
-{
+- (NSUInteger)cardCount {
     return [self.cards count];
 }
 
-
-- (void)removeCardAtIndex:(NSUInteger)index
-{
+- (void)removeCardAtIndex:(NSUInteger)index {
     [self.cards removeObjectAtIndex:index];
 }
-
 
 @end

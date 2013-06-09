@@ -9,117 +9,117 @@
 #import "FlipResult.h"
 
 @interface FlipResult ()
-@property (strong, nonatomic) NSMutableArray *results;
+@property (readwrite, nonatomic) NSAttributedString *lastResult;
 @property (weak, nonatomic) id <CardRendererProtocol> renderer;
+
+@property (strong, nonatomic) NSArray *cards;
+@property (nonatomic) NSInteger score;
 @end
 
 @implementation FlipResult
 
-- (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer
-{
-    self = [super init];
 
-    if (self)
-    {
+- (NSAttributedString *)lastResult {
+    if (!_lastResult) {
+        _lastResult = [[NSAttributedString alloc] init];
+    }
+    return _lastResult;
+}
+
+- (id)initWithCardRenderer:(id<CardRendererProtocol>)renderer {
+    self = [super init];
+    
+    if (self) {
         _renderer = renderer;
     }
-
+    
     return self;
 }
 
-
-- (NSMutableArray *)results
-{
-    if (!_results)
-    {
-        _results = [[NSMutableArray alloc] init];
-    }
-
-    return _results;
+- (void)addMatchForCards:(NSArray *)cards withScore:(NSInteger)score {
+    self.cards = cards;
+    self.score = score;
+    
+    [self updateResultWithMatch];
 }
 
+- (void)addMismatchForCards:(NSArray *)cards withScore:(NSInteger)score {
+    self.cards = cards;
+    self.score = score;
+    
+    [self updateResultWithMismatch];
+}
 
-- (void)appendString:(NSString *)str to:(NSMutableAttributedString *)attrStr
-{
+- (void)addFlipForCards:(NSArray *)cards {
+    self.cards = cards;
+    self.score = 0;
+    
+    [self updateResultWithFlip];
+}
+
+- (void)appendString:(NSString *)str to:(NSMutableAttributedString *)attrStr {
     NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:str];
-
+    
     [attrStr appendAttributedString:tmp];
 }
 
-
-- (void)addMatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
-{
+- (void)updateResultWithMatch {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-
-    [self appendString:@"Matched " to:result];
-
-    [result appendAttributedString:[self.renderer renderCard:card]];
-
-    for (Card *otherCard in otherCards)
+    
+    if (!self.renderer)
     {
-        [self appendString:@" & " to:result];
-        [result appendAttributedString:[self.renderer renderCard:otherCard]];
+        [self appendString:[NSString stringWithFormat:@"Match! %d points", self.score] to:result];
     }
-
-    [self appendString:[NSString stringWithFormat:@" for %d points", score] to:result];
-
-    [self.results addObject:result];
+    else
+    {
+        [self appendString:@"Matched " to:result];
+        
+        NSString *delim = @"";
+        for (Card *card in self.cards) {
+            [self appendString:delim to:result];
+            [result appendAttributedString:[self.renderer renderCard:card]];
+            delim = @" & ";
+        }
+        
+        [self appendString:[NSString stringWithFormat:@" for %d points", self.score] to:result];
+    }
+    
+    self.lastResult = result;
 }
 
-
-- (void)addMismatchForCard:(Card *)card andCards:(NSArray *)otherCards withScore:(NSUInteger)score
-{
+- (void)updateResultWithMismatch {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-
-    [result appendAttributedString:[self.renderer renderCard:card]];
-
-    for (Card *otherCard in otherCards)
+    
+    if (!self.renderer)
     {
-        [self appendString:@" & " to:result];
-        [result appendAttributedString:[self.renderer renderCard:otherCard]];
+        [self appendString:[NSString stringWithFormat:@"Not a match! %d point penalty", self.score] to:result];
     }
-
-    [self appendString:[NSString stringWithFormat:@" don't match! %d point penalty", score] to:result];
-
-    [self.results addObject:result];
+    else
+    {
+        NSString *delim = @"";
+        for (Card *card in self.cards) {
+            [self appendString:delim to:result];
+            [result appendAttributedString:[self.renderer renderCard:card]];
+            delim = @" & ";
+        }
+        
+        [self appendString:[NSString stringWithFormat:@" don't match! %d point penalty", self.score] to:result];
+    }
+    
+    self.lastResult = result;
 }
 
-
-- (void)addFlipForCard:(Card *)card
-{
+- (void)updateResultWithFlip {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-
-    [self appendString:@"Flipped up " to:result];
-
-    [result appendAttributedString:[self.renderer renderCard:card]];
-
-    [self.results addObject:result];
-}
-
-
-- (NSAttributedString *)lastResult
-{
-    return [self.results lastObject];
-}
-
-
-- (NSUInteger)count
-{
-    return self.results.count;
-}
-
-
-- (NSAttributedString *)resultAtIndex:(NSUInteger)index
-{
-    NSAttributedString *result;
-
-    if (index < self.results.count)
+    
+    if (self.renderer && [self.cards count])
     {
-        result = [self.results objectAtIndex:index];
+        [self appendString:@"Flipped up " to:result];
+        
+        [result appendAttributedString:[self.renderer renderCard:[self.cards lastObject]]];
     }
-
-    return result;
+    
+    self.lastResult = result;
 }
-
 
 @end
