@@ -86,6 +86,9 @@
 
         self.matchCount = matchCount;
         self.flipResult = flipResult;
+        
+        // TODO JET
+        [self matches];
     }
 
     return self;
@@ -172,6 +175,48 @@
 - (void)removeCardAtIndex:(NSUInteger)index
 {
     [self.cards removeObjectAtIndex:index];
+}
+
+
+-(void)matches
+    
+{
+    
+    NSDate *methodStart = [NSDate date];
+    
+    NSMutableArray *set = [[NSMutableArray alloc] init];
+    for (Card *card in self.cards)
+    {
+        if (!card.isUnplayable)
+        {
+            [set addObject:card];
+        }
+    }
+    
+    int len = [set count];
+    NSLog(@"playable cards: %d", len);
+
+    NSMutableArray *combinations = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < len; i++) {
+        for (int j = i + 1; j < len; j++) {
+            for (int k = j + 1; k < len; k++) {
+                if ([[set objectAtIndex:i] match:@[[set objectAtIndex:j], [set objectAtIndex:k]]])
+                {
+                    [combinations addObject:@[ [NSNumber numberWithInt:i], [NSNumber numberWithInt:j], [NSNumber numberWithInt:k]]];
+                }
+            }
+        }
+    }
+    
+    NSLog(@"len: %ld", (unsigned long)[combinations count]);
+    for (NSArray *combi in combinations)
+    {
+        NSLog(@"%@", combi);
+    }
+    NSDate *methodFinish = [NSDate date];
+    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
+    NSLog(@"executionTime = %f", executionTime);
 }
 
 

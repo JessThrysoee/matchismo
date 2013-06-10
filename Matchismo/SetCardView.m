@@ -8,6 +8,7 @@
 
 #import "SetCardView.h"
 
+
 @interface SetCardView ()
 @property (nonatomic) UIColor *uicolor;
 
@@ -169,6 +170,9 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    CGContextRef ctxt = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(ctxt);
+    
     [self cardClip];
 
     if (self.symbol == 0)
@@ -205,6 +209,27 @@
     {
         self.alpha = self.faceUp ? 0.5 : 1.0;
     }
+    
+    CGContextRestoreGState(ctxt);
+    
+    CGRect r = CGRectMake(self.cardW - 22, 2, 20, 20);
+    
+    
+    // TODO put into method
+    UIBezierPath *path2 = [UIBezierPath bezierPathWithOvalInRect:r];
+    [[UIColor redColor] setFill];
+    [path2 fill];
+    
+    [[UIColor whiteColor] setStroke];
+    [[UIColor whiteColor] setFill];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    UIFont *cornerFont = [UIFont systemFontOfSize:16];
+    
+    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @"88"] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],  NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: cornerFont }];
+    
+    [cornerText drawInRect:r];
 }
 
 
