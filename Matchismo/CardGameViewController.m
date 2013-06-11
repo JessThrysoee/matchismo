@@ -137,6 +137,7 @@
     self.flipResult = nil;
     self.drawButton.enabled = YES;
     [self.cardCollectionView reloadData];
+    [self updateUI];
 }
 
 
