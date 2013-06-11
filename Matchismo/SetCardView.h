@@ -14,6 +14,7 @@
 @property (nonatomic) NSUInteger symbol;  // [1-3]
 @property (nonatomic) NSUInteger shading;
 @property (nonatomic) NSUInteger color;
+@property (nonatomic) BOOL star;
 
 @property (nonatomic, readonly, getter = isThumb) BOOL thumb; // is this a thumbnail sized view
 @property (nonatomic) BOOL faceUp;

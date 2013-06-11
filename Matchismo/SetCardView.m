@@ -212,24 +212,24 @@
     
     CGContextRestoreGState(ctxt);
     
-    CGRect r = CGRectMake(self.cardW - 22, 2, 20, 20);
-    
-    
-    // TODO put into method
-    UIBezierPath *path2 = [UIBezierPath bezierPathWithOvalInRect:r];
-    [[UIColor redColor] setFill];
-    [path2 fill];
-    
-    [[UIColor whiteColor] setStroke];
-    [[UIColor whiteColor] setFill];
+    [self drawStar];
+}
+
+-(void)drawStar
+{
+    if (!self.star)
+    {
+        return;
+    }
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
-    UIFont *cornerFont = [UIFont systemFontOfSize:16];
+    UIFont *font = [UIFont systemFontOfSize:18];
     
-    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", @"88"] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],  NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: cornerFont }];
+    UIColor *yellow = [UIColor colorWithRed:155/255.0 green:135/255.0 blue:21/255.0 alpha:1];
+    NSAttributedString *star = [[NSAttributedString alloc] initWithString:@"★" attributes:@{NSForegroundColorAttributeName:yellow,  NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName:font }];
     
-    [cornerText drawInRect:r];
+    [star drawAtPoint:CGPointMake(self.cardW - 22, 2)];
 }
 
 

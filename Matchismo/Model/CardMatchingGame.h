@@ -29,4 +29,7 @@
 
 - (void)addCard:(Card *)card;
 
+
+- (NSDictionary *)matches;
+
 @end

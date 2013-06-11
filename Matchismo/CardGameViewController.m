@@ -212,6 +212,10 @@
     [self reset];
 }
 
+- (IBAction)cheat {
+    [self.game matches];
+}
+
 
 - (NSAttributedString *)renderCard:(Card *)card
 {
