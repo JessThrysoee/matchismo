@@ -110,25 +110,7 @@
     self.game = nil;
     self.flipResult = nil;
     self.drawButton.enabled = YES;
-    
-    [self.cardCollectionView
-     performBatchUpdates: ^{
-         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-         
-         for (int i = self.startingCardCount; i < [self.cardCollectionView
-                                                   numberOfItemsInSection:0]; i++) {
-             [indexPaths addObject:[NSIndexPath indexPathForItem:i
-                                                       inSection:0]];
-         }
-         
-         [self.cardCollectionView
-          deleteItemsAtIndexPaths:indexPaths];
-     }
-     
-     completion:nil];
-    
-    
-    [self updateUI];
+    [self.cardCollectionView reloadData];
 }
 
 #define DRAW_NUMBER_OF_CARDS 7
