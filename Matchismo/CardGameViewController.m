@@ -71,7 +71,6 @@
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
     
     if (indexPath) {
-        [self.game removeStarsFromRandomMatch];
         [self.game flipCardAtIndex:indexPath.item];
         [self updateUI];
     }
@@ -79,6 +78,7 @@
 
 - (void)updateUI {
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    NSMutableArray *unplayableCards = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < [self.game cardCount]; i++) {
         Card *card = [self.game cardAtIndex:i];
@@ -86,7 +86,7 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         
         if (self.removeUnplayable && card.isUnplayable) {
-            [self.game removeCardAtIndex:i];
+            [unplayableCards addObject: [self.game cardAtIndex:i]];
             [indexPaths addObject:indexPath];
         } else {
             [self updateCell:[self.cardCollectionView cellForItemAtIndexPath:indexPath] usingCard:card];
@@ -94,6 +94,9 @@
     }
     
     if ([indexPaths count]) {
+        [self.game removeCardsInArray:unplayableCards];
+        [self.game removeStarsFromRandomMatch];
+        
         [self.cardCollectionView deleteItemsAtIndexPaths:indexPaths];
     }
     

@@ -138,6 +138,10 @@
     [self.cards removeObjectAtIndex:index];
 }
 
+- (void)removeCardsInArray:(NSArray*)cards {
+    [self.cards removeObjectsInArray:cards];
+}
+
 
 - (void)addStarsToRandomMatch {
     

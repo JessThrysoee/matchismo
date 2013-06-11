@@ -13,6 +13,7 @@
 @interface CardMatchingGame : NSObject
 
 @property (readonly, nonatomic) int score;
+@property (nonatomic, readonly) NSUInteger cardCount;
 
 // designated initializer
 - (id)initWithCardCount:(NSUInteger)cardCount
@@ -22,15 +23,11 @@
 
 - (void)flipCardAtIndex:(NSUInteger)index;
 
+- (void)addCard:(Card *)card;
 - (Card *)cardAtIndex:(NSUInteger)index;
 - (void)removeCardAtIndex:(NSUInteger)index;
-
-@property (nonatomic, readonly) NSUInteger cardCount;
-
-- (void)addCard:(Card *)card;
-
-- (void)randomMatch;
-
+- (void)removeCardsInArray:(NSArray*)cards;
+    
 - (void)addStarsToRandomMatch;
 -(void) removeStarsFromRandomMatch;
     
