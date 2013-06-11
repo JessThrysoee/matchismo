@@ -138,11 +138,16 @@
     [self.cards removeObjectAtIndex:index];
 }
 
-- (NSDictionary *)matches {
+
+- (void)addStarsToRandomMatch {
+    
+    if (self.matchCount != 3)
+    {
+        return;
+    }
+    
     NSMutableArray *set = [[NSMutableArray alloc] init];
     NSMutableArray *combinations = [[NSMutableArray alloc] init];
-    
-    NSDate *methodStart = [NSDate date];
     
     for (Card *card in self.cards) {
         if (!card.isUnplayable) {
@@ -151,55 +156,30 @@
     }
     
     int len = [set count];
-    NSLog(@"playable cards: %d", len);
-    
     for (int i = 0; i < len; i++) {
         for (int j = i + 1; j < len; j++) {
             for (int k = j + 1; k < len; k++) {
                 if ([[set objectAtIndex:i] match:@[[set objectAtIndex:j], [set objectAtIndex:k]]]) {
-                    [combinations addObject:@[ [NSNumber numberWithInt:i], [NSNumber numberWithInt:j], [NSNumber numberWithInt:k]]];
+                    [combinations addObject:@[ [self cardAtIndex:i], [self cardAtIndex:j], [self cardAtIndex:k] ]];
                 }
             }
         }
     }
     
-    if ([combinations count])
-    {
+    if ([combinations count]) {
         unsigned index = arc4random() % [combinations count];
-        return combinations[index];
+        ((Card*)combinations[index][0]).star = YES;
+        ((Card*)combinations[index][1]).star = YES;
+        ((Card*)combinations[index][2]).star = YES;
     }
-    return nil;
-    
-    NSLog(@"len: %ld", (unsigned long)[combinations count]);
-//    for (NSArray *combi in combinations) {
-//        NSLog(@"%@", combi);
-//    }
-    
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    for (int i = 0; i < [combinations count]; i++) {
-        NSNumber *combiOrderNumber = [NSNumber numberWithInt:i];
-        
-        NSArray *match = [combinations objectAtIndex:i];
-        //match = [6,7,9]
-        
-        for (NSNumber *cardIndex in match) {
-            NSArray *val = [dict objectForKey:cardIndex];
-            if (val) {
-                val = [val arrayByAddingObject:combiOrderNumber];
-            } else {
-                val = @[combiOrderNumber];
-            }
-            [dict setObject:val forKey:cardIndex];
-        }
+}
+
+-(void) removeStarsFromRandomMatch
+{
+    for (Card* card in self.cards)
+    {
+        card.star = NO;
     }
-    NSLog(@"matchss: %@", dict);
-    
-    // profiling
-    NSDate *methodFinish = [NSDate date];
-    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
-    NSLog(@"executionTime = %f", executionTime);
-    
-    return [dict copy];
 }
 
 @end

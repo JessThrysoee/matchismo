@@ -29,7 +29,9 @@
 
 - (void)addCard:(Card *)card;
 
+- (void)randomMatch;
 
-- (NSDictionary *)matches;
-
+- (void)addStarsToRandomMatch;
+-(void) removeStarsFromRandomMatch;
+    
 @end

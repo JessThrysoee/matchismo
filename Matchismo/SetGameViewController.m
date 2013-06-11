@@ -93,7 +93,8 @@
             cardView.symbol = setCard.symbol;
             cardView.color = setCard.color;
             cardView.shading = setCard.shading;
-
+            cardView.star = setCard.star;
+            
             cardView.faceUp = setCard.isFaceup;
         }
         else
