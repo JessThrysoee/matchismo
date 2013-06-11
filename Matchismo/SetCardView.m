@@ -171,8 +171,9 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctxt = UIGraphicsGetCurrentContext();
+
     CGContextSaveGState(ctxt);
-    
+
     [self cardClip];
 
     if (self.symbol == 0)
@@ -209,9 +210,9 @@
     {
         self.alpha = self.faceUp ? 0.5 : 1.0;
     }
-    
+
     CGContextRestoreGState(ctxt);
-    
+
     [self drawStar];
 }
 
@@ -366,23 +367,23 @@
     [border addClip];
 }
 
--(void)drawStar
+
+- (void)drawStar
 {
     if (!self.star || self.isThumb)
     {
         return;
     }
-    
+
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
     UIFont *font = [UIFont systemFontOfSize:18];
-    
-    UIColor *yellow = [UIColor colorWithRed:155/255.0 green:135/255.0 blue:21/255.0 alpha:1];
-    NSAttributedString *star = [[NSAttributedString alloc] initWithString:@"★" attributes:@{NSForegroundColorAttributeName:yellow,  NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName:font }];
-    
+
+    UIColor *yellow = [UIColor colorWithRed:155 / 255.0 green:135 / 255.0 blue:21 / 255.0 alpha:1];
+    NSAttributedString *star = [[NSAttributedString alloc] initWithString:@"★" attributes:@{ NSForegroundColorAttributeName: yellow,  NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: font }];
+
     [star drawAtPoint:CGPointMake(self.cardW - 22, 2)];
 }
-
 
 
 CGPoint prevPoint(CGPoint p, CGFloat slope, CGFloat length)

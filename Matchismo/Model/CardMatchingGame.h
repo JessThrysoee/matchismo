@@ -26,9 +26,9 @@
 - (void)addCard:(Card *)card;
 - (Card *)cardAtIndex:(NSUInteger)index;
 - (void)removeCardAtIndex:(NSUInteger)index;
-- (void)removeCardsInArray:(NSArray*)cards;
-    
-- (void)addStarsToRandomMatch;
--(void) removeStarsFromRandomMatch;
-    
+- (void)removeCardsInArray:(NSArray *)cards;
+
+- (void)  addStarsToRandomMatch;
+- (void)  removeStarsFromRandomMatch;
+
 @end
