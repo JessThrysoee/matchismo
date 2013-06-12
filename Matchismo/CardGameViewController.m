@@ -119,7 +119,7 @@
     if ([indexPaths count])
     {
         [self.game removeCardsInArray:unplayableCards];
-        [self.game removeStarsFromRandomMatch];
+        [self.game removeStars];
 
         [self.cardCollectionView deleteItemsAtIndexPaths:indexPaths];
     }
@@ -200,8 +200,8 @@
 
 - (IBAction)cheat
 {
-    [self.game removeStarsFromRandomMatch];
-    [self.game addStarsToRandomMatch];
+    [self.game removeStars];
+    [self.game addStarsToNextMatch];
     [self updateUI];
 }
 
