@@ -163,7 +163,7 @@
             if (card)
             {
                 [self.game
-                  addCard:card];
+                 addCard:card];
                 [indexPaths addObject:[NSIndexPath indexPathForItem:i
                                                           inSection:0]];
             }
@@ -184,9 +184,9 @@
                   NSIndexPath *lastItem = [NSIndexPath indexPathForItem:self.game.cardCount - 1
                                                         inSection:0];
                   [self.cardCollectionView
-                  scrollToItemAtIndexPath:lastItem
-                     atScrollPosition:UICollectionViewScrollPositionTop
-                             animated:YES];
+                   scrollToItemAtIndexPath:lastItem
+                          atScrollPosition:UICollectionViewScrollPositionTop
+                                  animated:YES];
                   }
               }];
 }

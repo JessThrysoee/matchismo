@@ -28,7 +28,7 @@
 - (void)removeCardAtIndex:(NSUInteger)index;
 - (void)removeCardsInArray:(NSArray *)cards;
 
-- (void)addStarsToNextMatch;
-- (void)removeStars;
+- (void)  addStarsToNextMatch;
+- (void)  removeStars;
 
 @end
